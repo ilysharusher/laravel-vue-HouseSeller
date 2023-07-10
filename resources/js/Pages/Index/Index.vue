@@ -1,16 +1,17 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
+import MainLayout from '@/Layouts/MainLayout.vue';
 
 defineProps({
-    message: String,
-})
+    message: String
+});
 </script>
 
 <template>
-    <div>
+    <MainLayout>
         <h1>Props say: {{ message }}</h1>
         <Link href='/show'>goto Show</Link>
-    </div>
+    </MainLayout>
 </template>
 
 <style scoped>
