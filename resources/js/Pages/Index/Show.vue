@@ -1,14 +1,19 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
-import MainLayout from '@/Layouts/MainLayout.vue';
 
 </script>
 
+<script>
+import MainLayout from '@/Layouts/MainLayout.vue';
+
+export default {
+    layout: MainLayout
+};
+</script>
+
 <template>
-    <MainLayout>
-        <h1>Show</h1>
-        <Link href='/'>goto Index</Link>
-    </MainLayout>
+    <h1>Show</h1>
+    <Link href='/'>goto Index</Link>
 </template>
 
 <style scoped>
