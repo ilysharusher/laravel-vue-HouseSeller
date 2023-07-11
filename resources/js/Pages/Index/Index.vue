@@ -6,14 +6,6 @@ defineProps({
 });
 </script>
 
-<script>
-import MainLayout from '@/Layouts/MainLayout.vue';
-
-export default {
-    layout: MainLayout
-};
-</script>
-
 <template>
     <h1>Props say: {{ message }}</h1>
     <Link href='/show'>goto Show</Link>
