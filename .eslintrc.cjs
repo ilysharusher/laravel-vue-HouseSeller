@@ -11,8 +11,9 @@ module.exports = {
     },
     rules: {
         indent: ['error', 4],
+        'vue/html-indent': ['error', 4],
         quotes: ['warn', 'single'],
-        semi: ['warn', 'never'],
+        semi: ['warn', 'always'],
         'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
         'comma-dangle': ['warn', 'always-multiline'],
         'vue/multi-word-component-names': 'off',

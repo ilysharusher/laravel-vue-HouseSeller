@@ -1,14 +1,21 @@
 <script setup>
-import { Link } from '@inertiajs/vue3'
+import { Link } from '@inertiajs/vue3';
 
 defineProps({
-    message: String,
-})
+    listings: {
+        type: Array,
+        required: true,
+    },
+});
 </script>
 
 <template>
-  <h1>Props say: {{ message }}</h1>
-  <Link href="/show">goto Show</Link>
+    <div
+        v-for="listing in listings"
+        :key="listing.id"
+    >
+        <Link :href="`listing/${listing.id}`">{{ listing.id }}</Link>
+    </div>
 </template>
 
 <style scoped>

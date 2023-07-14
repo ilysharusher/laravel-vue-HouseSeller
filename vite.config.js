@@ -11,8 +11,8 @@ export default defineConfig({
         vue({
             template: {
                 base: null,
-                includeAbsolute: false
-            }
+                includeAbsolute: false,
+            },
         }),
     ],
 });
