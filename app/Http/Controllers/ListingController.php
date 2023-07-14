@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
             'Listing/Index',
@@ -17,9 +17,9 @@ class ListingController extends Controller
         );
     }
 
-    public function create()
+    public function create(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia('Listing/Create');
     }
 
     public function store(Request $request)
@@ -27,7 +27,7 @@ class ListingController extends Controller
         //
     }
 
-    public function show(Listing $listing)
+    public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
             'Listing/Show',
