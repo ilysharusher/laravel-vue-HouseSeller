@@ -11,11 +11,11 @@ module.exports = {
     },
     rules: {
         indent: ['error', 4],
-        'vue/html-indent': ['error', 4],
         quotes: ['warn', 'single'],
         semi: ['warn', 'always'],
         'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: true }],
         'comma-dangle': ['warn', 'always-multiline'],
+        'vue/html-indent': ['error', 4],
         'vue/multi-word-component-names': 'off',
         'vue/max-attributes-per-line': 'off',
         'vue/no-v-html': 'off',

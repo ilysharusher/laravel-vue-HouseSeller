@@ -22,9 +22,12 @@ class ListingController extends Controller
         return inertia('Listing/Create');
     }
 
-    public function store(Request $request)
+    public function store(Request $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        Listing::query()->create($request->all());
+
+        return redirect()->route('listing.index')
+            ->with('success', 'Listing created successfully.');
     }
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
