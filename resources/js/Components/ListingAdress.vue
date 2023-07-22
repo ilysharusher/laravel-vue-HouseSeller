@@ -1,7 +1,9 @@
 <script setup>
+import { Link } from '@inertiajs/vue3';
+
 defineProps({
     listing: {
-        type: Array,
+        type: Object,
         required: true,
     },
 });

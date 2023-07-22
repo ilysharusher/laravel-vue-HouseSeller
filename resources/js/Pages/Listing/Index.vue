@@ -3,7 +3,7 @@ import { Link } from '@inertiajs/vue3';
 
 defineProps({
     listings: {
-        type: Array,
+        type: Object,
         required: true,
     },
 });
