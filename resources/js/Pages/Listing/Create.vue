@@ -2,14 +2,14 @@
 import { useForm } from '@inertiajs/vue3';
 
 const form = useForm({
-    area: 0,
-    beds: 0,
-    baths: 0,
+    area: null,
+    beds: null,
+    baths: null,
     city: null,
     street: null,
-    street_number: 0,
+    street_number: null,
     code: null,
-    price: 0,
+    price: null,
 });
 
 const submit = () => form.post('/listing');
@@ -68,7 +68,7 @@ const submit = () => form.post('/listing');
 
             <div>
                 <label>Street Nr</label>
-                <input v-model.number="form.street_number" type="text" />
+                <input v-model="form.street_number" type="text" />
                 <div v-if="form.errors.street_number" class="error">
                     {{ form.errors.street_number }}
                 </div>

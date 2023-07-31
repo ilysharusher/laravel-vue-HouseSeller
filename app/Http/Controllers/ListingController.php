@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreListingRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -22,9 +23,9 @@ class ListingController extends Controller
         return inertia('Listing/Create');
     }
 
-    public function store(Request $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreListingRequest $request): \Illuminate\Http\RedirectResponse
     {
-        Listing::query()->create($request->all());
+        Listing::query()->create($request->validated());
 
         return redirect()->route('listing.index')
             ->with('success', 'Listing created successfully.');
