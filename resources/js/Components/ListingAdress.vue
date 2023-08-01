@@ -11,6 +11,7 @@ defineProps({
 </script>
 
 <template>
+    |
     <Link href="/listing">Go back</Link>
     <br />
     <br />

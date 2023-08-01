@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreListingRequest;
+use App\Http\Requests\UpdateListingRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class ListingController extends Controller
         Listing::query()->create($request->validated());
 
         return redirect()->route('listing.index')
-            ->with('success', 'Listing created successfully.');
+                         ->with('success', 'Listing created successfully.');
     }
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
@@ -41,14 +42,22 @@ class ListingController extends Controller
         );
     }
 
-    public function edit(Listing $listing)
+    public function edit(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia(
+            'Listing/Edit',
+            [
+                'listing' => $listing
+            ]
+        );
     }
 
-    public function update(Request $request, Listing $listing)
+    public function update(UpdateListingRequest $request, Listing $listing): \Illuminate\Http\RedirectResponse
     {
-        //
+        $listing->update($request->validated());
+
+        return redirect()->route('listing.index')
+                         ->with('success', 'Listing updated successfully.');
     }
 
     public function destroy(Listing $listing)
