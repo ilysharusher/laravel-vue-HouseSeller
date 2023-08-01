@@ -60,8 +60,11 @@ class ListingController extends Controller
                          ->with('success', 'Listing updated successfully.');
     }
 
-    public function destroy(Listing $listing)
+    public function destroy(Listing $listing): \Illuminate\Http\RedirectResponse
     {
-        //
+        $listing->delete();
+
+        return redirect()->back()
+                         ->with('success', 'Listing deleted successfully.');
     }
 }

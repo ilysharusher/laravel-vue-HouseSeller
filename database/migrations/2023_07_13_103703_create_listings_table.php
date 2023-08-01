@@ -25,6 +25,8 @@ return new class extends Migration {
             $table->unsignedInteger('price');
 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
