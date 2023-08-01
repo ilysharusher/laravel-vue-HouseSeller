@@ -10,7 +10,7 @@ const form = useForm({
     ...props.listing,
 });
 
-const submit = () => form.patch('/listing/' + props.listing.id);
+const submit = () => form.patch(route('listing.update', props.listing.id));
 </script>
 
 <template>

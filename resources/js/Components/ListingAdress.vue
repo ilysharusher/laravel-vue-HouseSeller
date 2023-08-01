@@ -12,7 +12,7 @@ defineProps({
 
 <template>
     |
-    <Link href="/listing">Go back</Link>
+    <Link :href="route('listing.index')">Go back</Link>
     <br />
     <br />
 
