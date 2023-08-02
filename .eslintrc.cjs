@@ -21,16 +21,7 @@ module.exports = {
         'vue/no-v-html': 'off',
         'vue/require-default-prop': 'off',
         'vue/singleline-html-element-content-newline': 'off',
-        'vue/html-self-closing': [
-            'warn',
-            {
-                html: {
-                    void: 'always',
-                    normal: 'always',
-                    component: 'always'
-                }
-            }
-        ],
+        'vue/html-self-closing': 'off',
         'vue/no-v-text-v-html-on-component': 'off'
     }
 };

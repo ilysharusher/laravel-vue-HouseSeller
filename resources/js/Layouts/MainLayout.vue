@@ -1,6 +1,8 @@
 <script setup>
 import { computed } from 'vue';
-import { Link, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
+import Header from '@/Components/Layout/Header.vue';
+import SuccessAlert from '@/Components/Alerts/SuccessAlert.vue';
 
 const flashSuccess = computed(
     () => usePage().props.flash.success,
@@ -8,18 +10,12 @@ const flashSuccess = computed(
 </script>
 
 <template>
-    <Link :href="route('listing.index')">Listings</Link>
-    |
-    <Link :href="route('listing.create')">Create Listing</Link>
-    <div v-if="flashSuccess" class="success">
-        {{ flashSuccess }}
-    </div>
-    <slot />
+    <Header />
+
+    <main class="container mx-auto p-4">
+        <SuccessAlert v-if="flashSuccess" :flash-success="flashSuccess" />
+        <slot />
+    </main>
 </template>
 
-<style scoped>
-.success {
-    background-color: green;
-    color: white;
-}
-</style>
+<style scoped></style>
