@@ -1,6 +1,8 @@
 <script setup>
 import { Link } from '@inertiajs/vue3';
 import Box from '@/Components/UI/Box.vue';
+import ListingAdress from '@/Components/Listing/ListingAdress.vue';
+import ListingSpace from '@/Components/Listing/ListingSpace.vue';
 
 defineProps({
     listings: {
@@ -17,7 +19,10 @@ defineProps({
             :key="listing.id"
         >
             <div>
-                <Link :href="route('listing.show', listing.id)">{{ listing.id }}</Link>
+                <Link :href="route('listing.show', listing.id)">
+                    <ListingSpace :listing="listing" class="text-lg" />
+                    <ListingAdress :listing="listing" class="text-gray-500" />
+                </Link>
             </div>
             <div>
                 <Link :href="route('listing.edit', listing.id)">Edit</Link>

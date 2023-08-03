@@ -1,5 +1,5 @@
 <script setup>
-import ListingAdress from '@/Components/ListingAdress.vue';
+import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 
 defineProps({
     listing: {

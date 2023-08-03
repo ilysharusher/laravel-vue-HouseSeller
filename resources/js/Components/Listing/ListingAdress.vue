@@ -11,19 +11,6 @@ defineProps({
 </script>
 
 <template>
-    |
-    <Link :href="route('listing.index')">Go back</Link>
-    <br />
-    <br />
-
-    {{ listing.id }}
-    |
-    {{ listing.area }}
-    |
-    {{ listing.beds }}
-    |
-    {{ listing.baths }}
-    |
     {{ listing.city }}
     |
     {{ listing.street }}
@@ -31,8 +18,6 @@ defineProps({
     {{ listing.street_number }}
     |
     {{ listing.code }}
-    |
-    {{ listing.price }}
 </template>
 
 <style scoped>
