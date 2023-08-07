@@ -12,7 +12,7 @@ import { Link } from '@inertiajs/vue3';
                 <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href="route('listing.index')">HouseSeller</Link>
                 </div>
-                <div class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium p-2 rounded-md">
+                <div class="btn-primary">
                     <Link :href="route('listing.create')">+ New Listing</Link>
                 </div>
             </nav>
