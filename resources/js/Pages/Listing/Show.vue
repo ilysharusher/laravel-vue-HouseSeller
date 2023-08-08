@@ -3,6 +3,7 @@ import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import ListingSpace from '@/Components/Listing/ListingSpace.vue';
 import Box from '@/Components/UI/Box.vue';
+import ListingMonthlyPayment from '@/Components/Listing/ListingMonthlyPayment.vue';
 
 defineProps({
     listing: {
@@ -30,9 +31,9 @@ defineProps({
             </Box>
             <Box>
                 <template #title>
-                    Buy this home
+                    Monthly payment
                 </template>
-                Make an offer
+                <ListingMonthlyPayment :listing="listing" />
             </Box>
         </div>
     </div>
