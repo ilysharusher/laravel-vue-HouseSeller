@@ -1,6 +1,7 @@
 <script setup>
+import { ref } from 'vue';
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
-import { computed, ref } from 'vue';
+import useMonthlyPayment from '@/Composables/useMonthlyPayment.js';
 
 const props = defineProps({
     listing: {
@@ -9,19 +10,11 @@ const props = defineProps({
     },
 });
 
+const price = props.listing.price;
 const interestRate = ref(2.5);
 const duration = ref(30);
 
-const monthlyPayment = computed(() => {
-    const price = props.listing.price;
-    const interest = interestRate.value / 100 / 12;
-    const payments = duration.value * 12;
-
-    const x = Math.pow(1 + interest, payments);
-    const monthly = (price * x * interest) / (x - 1);
-
-    return monthly.toFixed(2);
-});
+const { monthlyPayment} = useMonthlyPayment(price, interestRate, duration);
 </script>
 
 <template>
