@@ -6,7 +6,6 @@ const props = defineProps({
     listing: Object,
 });
 
-// eslint-disable-next-line vue/no-setup-props-destructure
 const form = useForm({
     ...props.listing,
 });

@@ -14,7 +14,7 @@ const price = props.listing.price;
 const interestRate = ref(2.5);
 const duration = ref(30);
 
-const { monthlyPayment} = useMonthlyPayment(price, interestRate, duration);
+const { monthlyPayment } = useMonthlyPayment(price, interestRate, duration);
 </script>
 
 <template>
