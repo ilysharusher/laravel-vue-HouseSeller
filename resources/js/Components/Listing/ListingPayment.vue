@@ -45,7 +45,7 @@ const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(price, in
             </div>
         </div>
         <div class="flex justify-between">
-            <div>Interests</div>
+            <div>Interests (%)</div>
             <div>
                 <ListingPrice :price="totalInterest" class="font-medium" />
             </div>
