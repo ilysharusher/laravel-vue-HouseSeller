@@ -3,7 +3,7 @@ import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import ListingSpace from '@/Components/Listing/ListingSpace.vue';
 import Box from '@/Components/UI/Box.vue';
-import ListingMonthlyPayment from '@/Components/Listing/ListingMonthlyPayment.vue';
+import ListingMonthlyPayment from '@/Components/Listing/ListingPayment.vue';
 
 defineProps({
     listing: {

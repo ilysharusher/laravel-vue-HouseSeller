@@ -14,7 +14,7 @@ const price = props.listing.price;
 const interestRate = ref(2.5);
 const duration = ref(30);
 
-const { monthlyPayment } = useMonthlyPayment(price, interestRate, duration);
+const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(price, interestRate, duration);
 </script>
 
 <template>
@@ -36,6 +36,26 @@ const { monthlyPayment } = useMonthlyPayment(price, interestRate, duration);
     <div class="class=&quot;text-gray-600 dark:text-gray-300 mt-2">
         <div class="text-gray-400">Your monthly payment</div>
         <ListingPrice :price="monthlyPayment" class="text-3xl" />
+    </div>
+    <div class="mt-4 text-gray-500">
+        <div class="flex justify-between">
+            <div>Total paid</div>
+            <div>
+                <ListingPrice :price="totalPaid" class="font-medium" />
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div>Principal paid</div>
+            <div>
+                <ListingPrice :price="listing.price" class="font-medium" />
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div>Interest paid</div>
+            <div>
+                <ListingPrice :price="totalInterest" class="font-medium" />
+            </div>
+        </div>
     </div>
 </template>
 
