@@ -39,21 +39,21 @@ const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(price, in
     </div>
     <div class="mt-4 text-gray-500">
         <div class="flex justify-between">
-            <div>Total paid</div>
-            <div>
-                <ListingPrice :price="totalPaid" class="font-medium" />
-            </div>
-        </div>
-        <div class="flex justify-between">
-            <div>Principal paid</div>
+            <div>Base price</div>
             <div>
                 <ListingPrice :price="listing.price" class="font-medium" />
             </div>
         </div>
         <div class="flex justify-between">
-            <div>Interest paid</div>
+            <div>Interests</div>
             <div>
                 <ListingPrice :price="totalInterest" class="font-medium" />
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <div>Total price</div>
+            <div>
+                <ListingPrice :price="totalPaid" class="font-medium" />
             </div>
         </div>
     </div>
