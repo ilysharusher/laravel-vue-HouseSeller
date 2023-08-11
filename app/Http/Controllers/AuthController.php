@@ -6,9 +6,9 @@ use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function create()
+    public function create(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia('Auth/Login');
     }
 
     public function store(Request $request)
