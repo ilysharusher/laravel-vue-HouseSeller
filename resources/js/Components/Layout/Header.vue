@@ -1,5 +1,10 @@
 <script setup>
-import { Link } from '@inertiajs/vue3';
+import {Link, usePage} from '@inertiajs/vue3';
+import {computed} from 'vue';
+
+const user = computed(
+    () => usePage().props.auth.user,
+);
 </script>
 
 <template>
@@ -12,8 +17,15 @@ import { Link } from '@inertiajs/vue3';
                 <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
                     <Link :href="route('listing.index')">HouseSeller</Link>
                 </div>
-                <div class="btn-primary">
-                    <Link :href="route('listing.create')">+ New Listing</Link>
+                <div v-if="user" class="flex items-center gap-4">
+                    <div class="text-sm text-gray-500">
+                        {{ user.name }}
+                    </div>
+                    <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
+                    <Link :href="route('logout')" method="get" as="button" class="btn-secondary">Logout</Link>
+                </div>
+                <div v-else>
+                    <Link :href="route('login')" class="btn-primary">Login</Link>
                 </div>
             </nav>
         </div>

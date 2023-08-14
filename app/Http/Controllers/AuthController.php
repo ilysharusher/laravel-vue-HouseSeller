@@ -26,12 +26,12 @@ class AuthController extends Controller
 
     public function destroy()
     {
-        /*auth()->logout();
+        auth()->logout();
 
         request()->session()->invalidate();
 
         request()->session()->regenerateToken();
 
-        return redirect()->route('listing.index');*/
+        return redirect()->route('listing.index');
     }
 }
