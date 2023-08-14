@@ -22,7 +22,7 @@ const user = computed(
                         {{ user.name }}
                     </div>
                     <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
-                    <Link :href="route('logout')" method="get" as="button" class="btn-secondary">Logout</Link>
+                    <Link :href="route('logout')" method="delete" as="button" class="btn-secondary">Logout</Link>
                 </div>
                 <div v-else>
                     <Link :href="route('login')" class="btn-primary">Login</Link>

@@ -24,7 +24,7 @@ class AuthController extends Controller
         return redirect()->intended(route('listing.index'));
     }
 
-    public function destroy()
+    public function destroy(): \Illuminate\Http\RedirectResponse
     {
         auth()->logout();
 
