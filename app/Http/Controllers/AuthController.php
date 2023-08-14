@@ -21,7 +21,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended();
+        return redirect()->intended(route('listing.index'));
     }
 
     public function destroy()

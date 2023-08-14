@@ -1,5 +1,6 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
+import InputError from '@/Components/Errors/InputError.vue';
 
 const form = useForm({
     email: null,
@@ -15,11 +16,12 @@ const submit = () => form.post(route('login.store'));
             <div>
                 <label for="email">Your Email</label>
                 <input id="email" v-model="form.email" type="text" class="input" />
-                <div class="input-error">*error*</div>
+                <InputError :error-message="form.errors.email" />
             </div>
             <div class="my-4">
                 <label for="password">Your Password</label>
                 <input id="password" v-model="form.password" type="password" class="input" />
+                <InputError :error-message="form.errors.password" />
             </div>
             <div>
                 <button type="submit" class="btn-primary w-full">Login</button>
