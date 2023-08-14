@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreListingRequest;
-use App\Http\Requests\UpdateListingRequest;
+use App\Http\Requests\Listing\StoreRequest;
+use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
-use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
@@ -24,7 +23,7 @@ class ListingController extends Controller
         return inertia('Listing/Create');
     }
 
-    public function store(StoreListingRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(StoreRequest $request): \Illuminate\Http\RedirectResponse
     {
         Listing::query()->create($request->validated());
 
@@ -52,7 +51,7 @@ class ListingController extends Controller
         );
     }
 
-    public function update(UpdateListingRequest $request, Listing $listing): \Illuminate\Http\RedirectResponse
+    public function update(UpdateRequest $request, Listing $listing): \Illuminate\Http\RedirectResponse
     {
         $listing->update($request->validated());
 
