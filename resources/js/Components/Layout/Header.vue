@@ -14,7 +14,7 @@ const user = computed(
                 <div class="text-lg font-medium">
                     <Link :href="route('listing.index')">Listings</Link>
                 </div>
-                <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
+                <div class="text-xl text-blue-700 dark:text-blue-300 font-bold text-center">
                     <Link :href="route('listing.index')">HouseSeller</Link>
                 </div>
                 <div v-if="user" class="flex items-center gap-4">
@@ -22,10 +22,10 @@ const user = computed(
                         {{ user.name }}
                     </div>
                     <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
-                    <Link :href="route('logout')" method="delete" as="button" class="btn-secondary">Logout</Link>
+                    <Link :href="route('logout')" method="post" as="button" class="btn-secondary">Logout</Link>
                 </div>
                 <div v-else>
-                    <Link :href="route('login')" class="btn-primary">Login</Link>
+                    <Link :href="route('login')" class="btn-primary">Login or Register</Link>
                 </div>
             </nav>
         </div>
