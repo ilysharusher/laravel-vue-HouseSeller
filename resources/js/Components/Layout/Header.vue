@@ -18,7 +18,7 @@ const user = computed(
                     <Link :href="route('listing.index')">HouseSeller</Link>
                 </div>
                 <div v-if="user" class="flex items-center gap-4">
-                    <div class="text-sm text-gray-500">
+                    <div class="text-sm text-gray-500 px-5">
                         {{ user.name }}
                     </div>
                     <Link :href="route('listing.create')" class="btn-primary">+ New Listing</Link>
