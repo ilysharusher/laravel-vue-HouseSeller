@@ -1,5 +1,6 @@
 <script setup>
 import DefaultInput from '@/Components/Forms/Inputs/DefaultInput.vue';
+import {Link} from '@inertiajs/vue3';
 
 defineProps({
     form: Object,
@@ -27,6 +28,7 @@ defineEmits({
             </div>
             <div>
                 <button type="submit" class="btn-primary w-full">Register</button>
+                <Link :href="route('login')" method="get" as="button" class="btn-secondary w-full">Already have an account ?</Link>
             </div>
         </div>
     </form>
