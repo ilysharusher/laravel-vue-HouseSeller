@@ -10,13 +10,9 @@ class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $user = User::query()->create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-
-        auth()->login($user);
+        auth()->login(
+            User::query()->create($request->validated())
+        );
 
         return redirect()
             ->route('listing.index')
