@@ -35,4 +35,9 @@ class User extends Authenticatable
     {
         return Attribute::set(fn($value) => bcrypt($value));
     }
+
+    public function listings(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Listing::class);
+    }
 }

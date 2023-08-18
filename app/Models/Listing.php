@@ -21,4 +21,9 @@ class Listing extends Model
         'code',
         'price',
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }
