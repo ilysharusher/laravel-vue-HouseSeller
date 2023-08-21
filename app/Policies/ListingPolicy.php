@@ -8,12 +8,12 @@ use Illuminate\Auth\Access\Response;
 
 class ListingPolicy
 {
-    public function viewAny(User $user): bool
+    public function viewAny(?User $user): bool
     {
         return true;
     }
 
-    public function view(User $user, Listing $listing): bool
+    public function view(?User $user, Listing $listing): bool
     {
         return true;
     }
