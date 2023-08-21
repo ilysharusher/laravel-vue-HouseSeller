@@ -12,6 +12,8 @@ class ListingController extends Controller
     {
         $this->middleware('auth')
             ->except(['index', 'show']);
+
+        $this->authorizeResource(Listing::class, 'listing');
     }
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
