@@ -20,26 +20,26 @@ class ListingPolicy
 
     public function create(User $user): bool
     {
-        return true;
+        return auth()->check();
     }
 
     public function update(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     public function delete(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     public function restore(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 
     public function forceDelete(User $user, Listing $listing): bool
     {
-        return true;
+        return $user->id === $listing->user_id;
     }
 }
