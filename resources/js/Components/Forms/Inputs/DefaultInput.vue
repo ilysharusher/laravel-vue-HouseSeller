@@ -3,26 +3,41 @@ import InputError from '@/Components/Errors/InputError.vue';
 
 defineProps({
     form: Object,
-    label: String,
-    content: String,
+    content: {
+        type: String,
+        default: null,
+    },
+    label: {
+        type: String,
+        default: null,
+    },
     type: {
         type: String,
         default: 'text',
     },
     placeholder: {
         type: String,
-        default: '',
+        default: null,
+    },
+    changeRound: {
+        type: String,
+        default: null,
     },
 });
 </script>
 
 <template>
     <div>
-        <label :for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ label }}</label>
+        <label v-if="label" :for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ label }}</label>
         <input
             :id="content"
             v-model="form[content]" :type="type"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            :class="{
+                'rounded-l-lg': changeRound === 'l',
+                'rounded-r-lg': changeRound === 'r',
+                'rounded-lg': changeRound === null,
+            }"
+            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             :placeholder="placeholder"
         >
         <InputError v-if="form.errors[content]" :error-message="form.errors[content]" />
