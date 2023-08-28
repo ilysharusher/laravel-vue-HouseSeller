@@ -16,7 +16,7 @@ const flashSuccess = computed(
         <SuccessAlert v-if="flashSuccess" :flash-success="flashSuccess" />
         <slot />
     </main>
-    <Footer />
+<!--    <Footer /> // it looks like so bad  -->
 </template>
 
 <style scoped></style>

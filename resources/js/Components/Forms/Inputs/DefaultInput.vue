@@ -31,7 +31,8 @@ defineProps({
         <label v-if="label" :for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{ label }}</label>
         <input
             :id="content"
-            v-model="form[content]" :type="type"
+            v-model="form[content]"
+            :type="type"
             :class="{
                 'rounded-l-lg': changeRound === 'l',
                 'rounded-r-lg': changeRound === 'r',

@@ -14,7 +14,7 @@ defineEmits({
 <template>
     <form @submit.prevent="$emit('submit')">
         <div class="w-1/2 mx-auto">
-            <div class="my-4">
+            <div class="mb-4">
                 <DefaultInput :form="form" label="Your Name" content="name" placeholder="Petya" />
             </div>
             <div class="my-4">
