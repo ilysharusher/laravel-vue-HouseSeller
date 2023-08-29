@@ -18,31 +18,17 @@ class ListingController extends Controller
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $filters = request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo');
+
         return inertia(
             'Listing/Index',
             [
-                'filters' => request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'),
+                'filters' => $filters,
                 'listings' => Listing::query()
-                    ->orderByDesc('created_at')
-                    ->when(
-                        request()->filled('priceFrom'),
-                        fn($query) => $query->where('price', '>=', request('priceFrom'))
-                    )->when(
-                        request()->filled('priceTo'),
-                        fn($query) => $query->where('price', '<=', request('priceTo'))
-                    )->when(
-                        request()->filled('beds'),
-                        fn($query) => $query->where('beds', (int)request('beds') <= 5 ? '=' : '>=', request('beds'))
-                    )->when(
-                        request()->filled('baths'),
-                        fn($query) => $query->where('baths', (int)request('baths') <= 5 ? '=' : '>=', request('baths'))
-                    )->when(
-                        request()->filled('areaFrom'),
-                        fn($query) => $query->where('area', '>=', request('areaFrom'))
-                    )->when(
-                        request()->filled('areaTo'),
-                        fn($query) => $query->where('area', '<=', request('areaTo'))
-                    )->paginate(9)->withQueryString()
+                    ->mostRecent()
+                    ->filter($filters)
+                    ->paginate(9)
+                    ->withQueryString()
             ]
         );
     }
