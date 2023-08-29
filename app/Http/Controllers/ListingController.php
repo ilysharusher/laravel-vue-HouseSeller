@@ -16,9 +16,6 @@ class ListingController extends Controller
         $this->authorizeResource(Listing::class, 'listing');
     }
 
-    /**
-     *
-     */
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
@@ -27,8 +24,25 @@ class ListingController extends Controller
                 'filters' => request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'),
                 'listings' => Listing::query()
                     ->orderByDesc('created_at')
-                    ->paginate(9)
-                    ->withQueryString()
+                    ->when(
+                        request()->filled('priceFrom'),
+                        fn($query) => $query->where('price', '>=', request('priceFrom'))
+                    )->when(
+                        request()->filled('priceTo'),
+                        fn($query) => $query->where('price', '<=', request('priceTo'))
+                    )->when(
+                        request()->filled('beds'),
+                        fn($query) => $query->where('beds', (int)request('beds') <= 5 ? '=' : '>=', request('beds'))
+                    )->when(
+                        request()->filled('baths'),
+                        fn($query) => $query->where('baths', (int)request('baths') <= 5 ? '=' : '>=', request('baths'))
+                    )->when(
+                        request()->filled('areaFrom'),
+                        fn($query) => $query->where('area', '>=', request('areaFrom'))
+                    )->when(
+                        request()->filled('areaTo'),
+                        fn($query) => $query->where('area', '<=', request('areaTo'))
+                    )->paginate(9)->withQueryString()
             ]
         );
     }
