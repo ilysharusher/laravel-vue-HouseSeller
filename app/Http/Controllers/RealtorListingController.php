@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 
 class RealtorListingController extends Controller
 {
-    public function index()
+    public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia('Realtor/Index',
+        [
+            'listings' => auth()->user()->listings()->get()
+        ]);
     }
 
     public function create()
