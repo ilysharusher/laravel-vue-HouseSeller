@@ -28,9 +28,28 @@ defineProps({
                     <ListingAdress :listing="listing" />
                 </div>
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                    <Link class="btn-secondary text-xs font-medium">Preview</Link>
-                    <Link class="btn-secondary text-xs font-medium">Edit</Link>
-                    <Link class="btn-red text-xs font-medium">Delete</Link>
+                    <Link 
+                        class="btn-secondary text-xs font-medium"
+                        :href="route('realtor.listing.show', listing.id)"
+                        as="button"
+                    >
+                        Preview
+                    </Link>
+                    <Link 
+                        class="btn-secondary text-xs font-medium"
+                        :href="route('realtor.listing.edit', listing.id)"
+                        as="button"
+                    >
+                        Edit
+                    </Link>
+                    <Link 
+                        class="btn-red text-xs font-medium" 
+                        :href="route('realtor.listing.destroy', listing.id)"
+                        method="delete" 
+                        as="button"
+                    >
+                        Delete
+                    </Link>
                 </div>
             </div>
         </Box>

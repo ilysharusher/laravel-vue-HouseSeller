@@ -46,7 +46,7 @@ class ListingController extends Controller
             ->with('success', 'Listing created successfully.');
     }
 
-    public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
+    /*public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
             'Listing/Show',
@@ -54,9 +54,9 @@ class ListingController extends Controller
                 'listing' => $listing
             ]
         );
-    }
+    }*/
 
-    public function edit(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
+    /*public function edit(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
             'Listing/Edit',
@@ -72,13 +72,13 @@ class ListingController extends Controller
 
         return redirect()->route('listing.index')
             ->with('success', 'Listing updated successfully.');
-    }
+    }*/
 
-    public function destroy(Listing $listing): \Illuminate\Http\RedirectResponse
+    /*public function destroy(Listing $listing): \Illuminate\Http\RedirectResponse
     {
         $listing->delete();
 
         return redirect()->back()
             ->with('success', 'Listing deleted successfully.');
-    }
+    }*/
 }

@@ -30,12 +30,6 @@ const { monthlyPayment } = useMonthlyPayment(props.listing.price, 2.5, 30);
                 <ListingAdress :listing="listing" class="text-gray-500" />
             </Link>
         </div>
-        <div>
-            <Link :href="route('listing.edit', listing.id)">Edit</Link>
-        </div>
-        <div>
-            <Link :href="route('listing.destroy', listing.id)" method="delete" as="button">Delete</Link>
-        </div>
         <br />
     </Box>
 </template>
