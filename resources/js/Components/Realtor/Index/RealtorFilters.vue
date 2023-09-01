@@ -1,13 +1,20 @@
 <script setup>
 import {reactive, watch} from 'vue';
+import {router} from '@inertiajs/vue3';
 
 const filterForm = reactive({
     // drafts: false,
     deleted: false,
 });
 
-watch(() => filterForm.deleted, (newValue, oldValue) => {
-    console.log(newValue, oldValue);
+watch(filterForm, () => {
+    router.get(
+        route('realtor.listing.index'),
+        filterForm,
+        {
+            preserveState: true,
+            preserveScroll: true,
+        });
 });
 </script>
 
