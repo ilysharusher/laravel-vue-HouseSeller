@@ -1,9 +1,13 @@
 <script setup>
-import {useForm} from '@inertiajs/vue3';
+import {reactive, watch} from 'vue';
 
-const filterForm = useForm({
-    drafts: false,
+const filterForm = reactive({
+    // drafts: false,
     deleted: false,
+});
+
+watch(() => filterForm.deleted, (newValue, oldValue) => {
+    console.log(newValue, oldValue);
 });
 </script>
 
