@@ -4,7 +4,7 @@ import {router} from '@inertiajs/vue3';
 import {debounce} from 'lodash';
 
 const filterForm = reactive({
-    drafts: false,
+    // drafts: false,
     deleted: false,
 });
 

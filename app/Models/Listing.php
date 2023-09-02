@@ -28,12 +28,7 @@ class Listing extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function scopeMostRecent(Builder $query): Builder
-    {
-        return $query->latest();
-    }
-
-    public function scopeFilter(Builder $query, array $filters): Builder
+    public function scopeFilter(Builder $query): Builder
     {
         return $query->when(
             request()->filled('priceFrom'),
@@ -53,6 +48,9 @@ class Listing extends Model
         )->when(
             request()->filled('areaTo'),
             fn($query) => $query->where('area', '<=', request('areaTo'))
+        )->when(
+            request()->boolean('deleted') === true,
+            fn($query) => $query->withTrashed()
         );
     }
 }

@@ -18,15 +18,13 @@ class ListingController extends Controller
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        $filters = request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo');
-
         return inertia(
             'Listing/Index',
             [
-                'filters' => $filters,
+                'filters' => request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'),
                 'listings' => Listing::query()
-                    ->mostRecent()
-                    ->filter($filters)
+                    ->latest()
+                    ->filter()
                     ->paginate(9)
                     ->withQueryString()
             ]

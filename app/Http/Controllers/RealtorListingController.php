@@ -19,7 +19,7 @@ class RealtorListingController extends Controller
     {
         return inertia('Realtor/Index',
         [
-            'listings' => auth()->user()->listings()->get()
+            'listings' => auth()->user()->listings()->filter()->latest()->get()
         ]);
     }
 
