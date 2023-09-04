@@ -23,7 +23,7 @@ class Listing extends Model
         'price',
     ];
 
-    protected $sortable = [
+    protected array $sortable = [
         'price',
         'created_at',
     ];
