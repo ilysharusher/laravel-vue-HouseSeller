@@ -3,9 +3,13 @@ import {reactive, watch} from 'vue';
 import {router} from '@inertiajs/vue3';
 import {debounce} from 'lodash';
 
+const props = defineProps({
+    filters: Object,
+});
+
 const filterForm = reactive({
-    // drafts: false,
-    deleted: false,
+    drafts: props.filters.drafts ?? false,
+    deleted: props.filters.deleted ?? false,
 });
 
 watch(filterForm,

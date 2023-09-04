@@ -24,7 +24,7 @@ class ListingController extends Controller
                 'filters' => request()->only('priceFrom', 'priceTo', 'beds', 'baths', 'areaFrom', 'areaTo'),
                 'listings' => Listing::query()
                     ->latest()
-                    ->filter()
+                    ->listingFilter()
                     ->paginate(9)
                     ->withQueryString()
             ]

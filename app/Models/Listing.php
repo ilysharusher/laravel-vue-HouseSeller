@@ -23,12 +23,17 @@ class Listing extends Model
         'price',
     ];
 
+    protected $sortable = [
+        'price',
+        'created_at',
+    ];
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    public function scopeFilter(Builder $query): Builder
+    public function scopeListingFilter(Builder $query): Builder
     {
         return $query->when(
             request()->filled('priceFrom'),
@@ -48,9 +53,20 @@ class Listing extends Model
         )->when(
             request()->filled('areaTo'),
             fn($query) => $query->where('area', '<=', request('areaTo'))
-        )->when(
+        );
+    }
+
+    public function scopeRealtorFilter(Builder $query)
+    {
+        return $query->when(
             request()->boolean('deleted') === true,
             fn($query) => $query->withTrashed()
+        )->when(
+            request()->filled('by'),
+            fn($query) => in_array(request('by'), $this->sortable) ? $query->orderBy(
+                request('by'),
+                request('order', 'asc')
+            ) : $query
         );
     }
 }
