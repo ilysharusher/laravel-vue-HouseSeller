@@ -14,7 +14,7 @@ const submit = () => form.patch(route('realtor.listing.update', props.listing.id
 </script>
 
 <template>
-    <ListingForm :form="form" @submit="submit" />
+    <ListingForm :form="form" action="Edit" @submit="submit" />
 </template>
 
 <style scoped>

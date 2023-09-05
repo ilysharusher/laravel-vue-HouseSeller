@@ -13,11 +13,11 @@ const form = useForm({
     price: null,
 });
 
-const submit = () => form.post(route('listing.store'));
+const submit = () => form.post(route('realtor.listing.store'));
 </script>
 
 <template>
-    <ListingForm :form="form" @submit="submit" />
+    <ListingForm :form="form" action="Create" @submit="submit" />
 </template>
 
 <style scoped>

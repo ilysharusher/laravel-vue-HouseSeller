@@ -9,7 +9,7 @@ Route::get('/hello', [IndexController::class, 'show'])
     ->name('hello')
     ->middleware('auth');
 
-Route::resource('listing', ListingController::class);
+Route::resource('listing', ListingController::class)->only('index', 'show');
 
 Route::prefix('auth')->group(function () {
     Route::middleware('guest')->group(function () {

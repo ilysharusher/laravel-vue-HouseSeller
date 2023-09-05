@@ -3,6 +3,7 @@ import DefaultInput from '@/Components/Forms/Inputs/DefaultInput.vue';
 
 defineProps({
     form: Object,
+    action: String,
 });
 
 defineEmits({
@@ -30,7 +31,7 @@ defineEmits({
             <DefaultInput :form="form" label="Price" content="price" class="col-span-6" />
 
             <div class="col-span-6">
-                <button type="submit" class="btn-primary">Edit</button>
+                <button type="submit" class="btn-primary">{{ action }}</button>
             </div>
         </div>
     </form>

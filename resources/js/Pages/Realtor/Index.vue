@@ -28,13 +28,13 @@ defineProps({
                     <ListingAdress :listing="listing" />
                 </div>
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                    <Link 
+                    <a
                         class="btn-secondary text-xs font-medium"
                         :href="route('realtor.listing.show', listing.id)"
-                        as="button"
+                        target="_blank"
                     >
                         Preview
-                    </Link>
+                    </a>
                     <Link 
                         class="btn-secondary text-xs font-medium"
                         :href="route('realtor.listing.edit', listing.id)"

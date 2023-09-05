@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Listing\StoreRequest;
 use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
 use Illuminate\Http\Request;
@@ -24,20 +25,23 @@ class RealtorListingController extends Controller
         ]);
     }
 
-    public function create()
+    public function create(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia('Realtor/Create');
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        $request->user()->listings()->create($request->validated());
+
+        return redirect()->route('realtor.listing.index')
+            ->with('success', 'Listing created successfully.');
     }
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
-            'Listing/Show',
+            'Realtor/Show',
             [
                 'listing' => $listing
             ]
@@ -47,7 +51,7 @@ class RealtorListingController extends Controller
     public function edit(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         return inertia(
-            'Listing/Edit',
+            'Realtor/Edit',
             [
                 'listing' => $listing
             ]
