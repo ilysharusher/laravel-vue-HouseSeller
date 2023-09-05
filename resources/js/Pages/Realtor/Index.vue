@@ -17,9 +17,19 @@ defineProps({
     <h1 class="text-3xl mb-4">Your Listings</h1>
     <RealtorFilters :filters="filters" />
     <section v-if="listings.data.length" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box v-for="listing in listings.data" :key="listing.id">
+        <Box 
+            v-for="listing in listings.data" 
+            :key="listing.id"
+            :class="{
+                'border-dashed': listing.deleted_at,
+            }"
+        >
             <div class="flex flex-col md:flex-row gap-2 md:items-center justify-between">
-                <div>
+                <div
+                    :class="{
+                        'opacity-25': listing.deleted_at,
+                    }"
+                >
                     <div class="xl:flex items-center gap-2">
                         <ListingPrice :price="listing.price" class="text-2xl font-medium" />
                         <ListingSpace :listing="listing" />
@@ -29,26 +39,42 @@ defineProps({
                 </div>
                 <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
                     <a
+                        :class="{
+                            'opacity-25 pointer-events-none': listing.deleted_at,
+                        }"
                         class="btn-secondary text-xs font-medium"
                         :href="route('realtor.listing.show', listing.id)"
                         target="_blank"
                     >
                         Preview
                     </a>
-                    <Link 
+                    <Link
+                        :class="{
+                            'opacity-25 pointer-events-none': listing.deleted_at,
+                        }"
                         class="btn-secondary text-xs font-medium"
                         :href="route('realtor.listing.edit', listing.id)"
                         as="button"
                     >
                         Edit
                     </Link>
-                    <Link 
+                    <Link
+                        v-if="!listing.deleted_at"
                         class="btn-red text-xs font-medium" 
                         :href="route('realtor.listing.destroy', listing.id)"
                         method="delete" 
                         as="button"
                     >
                         Delete
+                    </Link>
+                    <Link
+                        v-else
+                        class="btn-green text-xs font-medium"
+                        :href="route('realtor.listing.restore', listing.id)"
+                        method="patch"
+                        as="button"
+                    >
+                        Restore
                     </Link>
                 </div>
             </div>
@@ -58,7 +84,7 @@ defineProps({
         v-if="listings.data.length"
         class="py-12 w-full flex justify-center"
     >
-        <Pagination :links="listings.links" />
+        <Pagination v-if="listings.last_page !== 1" :links="listings.links" />
     </div>
 </template>
 

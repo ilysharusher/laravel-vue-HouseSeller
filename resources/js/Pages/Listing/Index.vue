@@ -22,7 +22,7 @@ defineProps({
         v-if="listings.data.length"
         class="py-12 w-full flex justify-center"
     >
-        <Pagination :links="listings.links" />
+        <Pagination v-if="listings.last_page !== 1" :links="listings.links" />
     </div>
 </template>
 
