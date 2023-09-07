@@ -33,6 +33,11 @@ class Listing extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function images(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(ListingImage::class);
+    }
+
     public function scopeListingFilter(Builder $query): Builder
     {
         return $query->when(
