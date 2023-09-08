@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\{AuthController, LoginController, LogoutController, RegisterController};
-use App\Http\Controllers\{IndexController, ListingController, RealtorListingController};
+use App\Http\Controllers\{IndexController, ListingController, ListingImageController, RealtorListingController};
 
 Route::get('/', [IndexController::class, 'index']);
 Route::get('/hello', [IndexController::class, 'show'])
@@ -26,4 +26,5 @@ Route::prefix('auth')->group(function () {
 Route::prefix('realtor')->middleware('auth')->name('realtor.')->group(function () {
     Route::patch('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
     Route::resource('listing', RealtorListingController::class);
+    Route::resource('listing.image', ListingImageController::class);
 });

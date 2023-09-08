@@ -59,6 +59,16 @@ defineProps({
                         Edit
                     </Link>
                     <Link
+                        :class="{
+                            'opacity-25 pointer-events-none': listing.deleted_at,
+                        }"
+                        class="btn-secondary text-xs font-medium"
+                        :href="route('realtor.listing.image.create', listing.id)"
+                        as="button"
+                    >
+                        Add Image
+                    </Link>
+                    <Link
                         v-if="!listing.deleted_at"
                         class="btn-red text-xs font-medium" 
                         :href="route('realtor.listing.destroy', listing.id)"
