@@ -1,9 +1,11 @@
 <script setup>
 import DefaultInput from '@/Components/Forms/Inputs/DefaultInput.vue';
+import {Link} from '@inertiajs/vue3';
 
 defineProps({
     form: Object,
     action: String,
+    listingId: String,
 });
 
 defineEmits({
@@ -30,9 +32,14 @@ defineEmits({
 
             <DefaultInput :form="form" label="Price" content="price" class="col-span-6" />
 
-            <div class="col-span-6">
-                <button type="submit" class="btn-primary">{{ action }}</button>
-            </div>
+            <button type="submit" class="btn-primary col-span-2 w-full">{{ action }}</button>
+            <Link
+                class="btn-secondary text-xs font-medium col-span-4 mr-0"
+                :href="route('realtor.listing.image.create', listingId)"
+                as="button"
+            >
+                Images
+            </Link>
         </div>
     </form>
 </template>
