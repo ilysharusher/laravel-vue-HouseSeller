@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Listing\ListingImage\StoreListingImageRequest;
+use App\Http\Requests\Listing\ListingImage\UpdateListingImageRequest;
 use App\Models\Listing;
 use App\Models\ListingImage;
-use App\Http\Requests\StoreListingImageRequest;
-use App\Http\Requests\UpdateListingImageRequest;
 
 class ListingImageController extends Controller
 {
@@ -22,9 +22,19 @@ class ListingImageController extends Controller
         );
     }
 
-    public function store(StoreListingImageRequest $request)
+    public function store(Listing $listing, StoreListingImageRequest $request): \Illuminate\Http\RedirectResponse
     {
-        //
+        if (request()->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('images', 'public');
+
+                $listing->images()->create([
+                    'image' => $path
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'The images were uploaded!');
     }
 
     public function show(ListingImage $listingImage)
