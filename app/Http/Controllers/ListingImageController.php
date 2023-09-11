@@ -26,7 +26,7 @@ class ListingImageController extends Controller
     {
         if (request()->hasFile('images')) {
             foreach ($request->file('images') as $image) {
-                $path = $image->store('images', 'public');
+                $path = $image->store('images');
 
                 $listing->images()->create([
                     'image' => $path
