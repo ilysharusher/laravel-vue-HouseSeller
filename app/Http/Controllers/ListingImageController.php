@@ -6,6 +6,7 @@ use App\Http\Requests\Listing\ListingImage\StoreListingImageRequest;
 use App\Http\Requests\Listing\ListingImage\UpdateListingImageRequest;
 use App\Models\Listing;
 use App\Models\ListingImage;
+use Illuminate\Support\Facades\Storage;
 
 class ListingImageController extends Controller
 {
@@ -53,8 +54,20 @@ class ListingImageController extends Controller
         //
     }
 
-    public function destroy(ListingImage $listingImage)
+    public function destroy($listing, ListingImage $image): \Illuminate\Http\RedirectResponse
     {
-        //
+        Storage::disk('public')->delete($image->image);
+        $image->delete();
+
+        return redirect()->back()->with('success', 'The image was deleted!');
+    }
+
+    public function destroy_all(Listing $listing): \Illuminate\Http\RedirectResponse
+    {
+        Storage::disk('public')->delete($listing->images()->pluck('image')->toArray());
+
+        $listing->images()->delete();
+
+        return redirect()->back()->with('success', 'All images were deleted!');
     }
 }
