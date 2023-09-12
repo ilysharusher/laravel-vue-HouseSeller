@@ -15,8 +15,17 @@ class ListingImage extends Model
         'image'
     ];
 
+    protected $appends = [
+        'img_src'
+    ];
+
     public function listing(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Listing::class);
+    }
+
+    public function getImgSrcAttribute(): string
+    {
+        return asset("storage/{$this->image}");
     }
 }

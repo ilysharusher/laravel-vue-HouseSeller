@@ -44,8 +44,12 @@ defineEmits({
                 <DefaultInput :form="filterForm" content="areaTo" placeholder="Area to" change-round="r" class="max-w-[100px]" />
             </div>
 
-            <button type="submit" class="btn-primary max-w-[100px]">Filter</button>
-            <button type="reset" class="btn-secondary max-w-[100px]" @click="$emit('reset')">Reset</button>
+            <div class="flex items-center">
+                <button type="submit" class="btn-primary mr-0 mb-0">Filter</button>
+            </div>
+            <div class="flex items-center">
+                <button type="reset" class="btn-secondary mb-0" @click="$emit('reset')">Reset</button>
+            </div>
         </div>
     </form>
 </template>

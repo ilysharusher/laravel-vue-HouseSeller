@@ -47,7 +47,7 @@ const reset = () => form.reset('images');
                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
                         <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF</p>
                     </div>
-                    <input id="dropzone-file" type="file" class="hidden" @input="addImage" />
+                    <input id="dropzone-file" type="file" multiple class="hidden" @input="addImage" />
                 </label>
             </div>
 
@@ -72,6 +72,17 @@ const reset = () => form.reset('images');
                 </button>
             </div>
         </form>
+    </Box>
+
+    <Box v-if="listing.images.length" class="mt-3">
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div
+                v-for="image in listing.images"
+                :key="image.id"
+            >
+                <img class="h-auto max-w-full rounded-lg" :src="image.img_src" alt="image">
+            </div>
+        </div>
     </Box>
 </template>
 
