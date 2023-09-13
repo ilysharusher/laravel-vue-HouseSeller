@@ -33,6 +33,8 @@ class ListingController extends Controller
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $listing->load('images');
+
         return inertia(
             'Listing/Show',
             [
