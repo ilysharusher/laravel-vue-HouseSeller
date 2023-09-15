@@ -6,6 +6,7 @@ defineProps({
     form: Object,
     action: String,
     listingId: String,
+    imagesCount: Number,
 });
 
 defineEmits({
@@ -38,7 +39,7 @@ defineEmits({
                 :href="route('realtor.listing.image.create', listingId)"
                 as="button"
             >
-                Images
+                Add images ({{ imagesCount }})
             </Link>
         </div>
     </form>

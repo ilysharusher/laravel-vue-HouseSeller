@@ -40,8 +40,10 @@ class RealtorListingController extends Controller
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $listing->load('images');
+
         return inertia(
-            'Realtor/Show',
+            'Listing/Show',
             [
                 'listing' => $listing
             ]
@@ -53,7 +55,8 @@ class RealtorListingController extends Controller
         return inertia(
             'Realtor/Edit',
             [
-                'listing' => $listing
+                'listing' => $listing,
+                'imagesCount' => $listing->images()->count(),
             ]
         );
     }
