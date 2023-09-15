@@ -14,7 +14,7 @@ class StoreListingImageRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'images.*' => ['image', 'mimes:jpg,jpeg', 'max:5000']
         ];
     }
 }
