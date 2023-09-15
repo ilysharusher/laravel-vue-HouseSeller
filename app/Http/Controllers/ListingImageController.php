@@ -10,6 +10,13 @@ use Illuminate\Support\Facades\Storage;
 
 class ListingImageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+
+        $this->middleware('verify.image.upload')->only('store');
+    }
+
     public function index()
     {
         //
@@ -26,14 +33,12 @@ class ListingImageController extends Controller
 
     public function store(Listing $listing, StoreListingImageRequest $request): \Illuminate\Http\RedirectResponse
     {
-        if (request()->hasFile('images')) {
-            foreach ($request->file('images') as $image) {
-                $path = $image->store('images');
+        foreach ($request->file('images') as $image) {
+            $path = $image->store('images');
 
-                $listing->images()->create([
-                    'image' => $path
-                ]);
-            }
+            $listing->images()->create([
+                'image' => $path
+            ]);
         }
 
         return redirect()->back()->with('success', 'The images were uploaded!');
