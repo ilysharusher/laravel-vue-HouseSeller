@@ -4,10 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\{AuthController, LoginController, LogoutController, RegisterController};
 use App\Http\Controllers\{IndexController, ListingController, ListingImageController, RealtorListingController};
 
-Route::get('/', [IndexController::class, 'index']);
-Route::get('/hello', [IndexController::class, 'show'])
-    ->name('hello')
-    ->middleware('auth');
+Route::get('/', function () {
+    return redirect('/listing');
+});
 
 Route::resource('listing', ListingController::class)->only('index', 'show');
 
