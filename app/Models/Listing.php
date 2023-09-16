@@ -38,6 +38,11 @@ class Listing extends Model
         return $this->hasMany(ListingImage::class);
     }
 
+    public function offers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Offer::class);
+    }
+
     public function scopeListingFilter(Builder $query): Builder
     {
         return $query->when(

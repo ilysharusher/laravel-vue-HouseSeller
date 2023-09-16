@@ -35,6 +35,7 @@ defineEmits({
 
             <button type="submit" class="btn-primary col-span-2 w-full">{{ action }}</button>
             <Link
+                v-if="listingId"
                 class="btn-secondary text-xs font-medium col-span-4 mr-0"
                 :href="route('realtor.listing.image.create', listingId)"
                 as="button"

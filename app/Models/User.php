@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use mysql_xdevapi\CollectionModify;
 
 class User extends Authenticatable
 {
@@ -39,5 +40,10 @@ class User extends Authenticatable
     public function listings(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Listing::class);
+    }
+
+    public function offers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Offer::class);
     }
 }
