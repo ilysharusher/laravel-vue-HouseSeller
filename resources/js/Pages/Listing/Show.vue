@@ -4,6 +4,7 @@ import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import ListingSpace from '@/Components/Listing/ListingSpace.vue';
 import Box from '@/Components/UI/Box.vue';
 import ListingMonthlyPayment from '@/Components/Listing/ListingPayment.vue';
+import MakeOffer from '@/Components/Listing/Show/MakeOffer.vue';
 
 defineProps({
     listing: {
@@ -98,6 +99,12 @@ defineProps({
                     Monthly payment
                 </template>
                 <ListingMonthlyPayment :listing="listing" />
+            </Box>
+            <Box>
+                <template #title>
+                    Make an offer
+                </template>
+                <MakeOffer :listing-id="listing.id" :price="listing.price" />
             </Box>
         </div>
     </div>
