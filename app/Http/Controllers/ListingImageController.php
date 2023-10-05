@@ -25,6 +25,7 @@ class ListingImageController extends Controller
     public function create(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         $listing->load('images');
+
         return inertia(
             'Realtor/ListingImage/Create',
             ['listing' => $listing]
@@ -37,7 +38,7 @@ class ListingImageController extends Controller
             $path = $image->store('images');
 
             $listing->images()->create([
-                'image' => $path
+                'image' => $path,
             ]);
         }
 

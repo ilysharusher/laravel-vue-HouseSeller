@@ -4,11 +4,10 @@ namespace App\Policies;
 
 use App\Models\Listing;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class ListingPolicy
 {
-    public function before(?User $user, string $ability): bool|null
+    public function before(?User $user, string $ability): ?bool
     {
         if ($user?->is_admin) {
             return true;

@@ -9,7 +9,6 @@ use App\Models\Offer;
 
 class ListingOfferController extends Controller
 {
-
     /*public function index()
     {
         //

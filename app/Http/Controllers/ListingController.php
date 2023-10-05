@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Listing\StoreRequest;
-use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
 
 class ListingController extends Controller
@@ -26,7 +24,7 @@ class ListingController extends Controller
                     ->latest()
                     ->listingFilter()
                     ->paginate(9)
-                    ->withQueryString()
+                    ->withQueryString(),
             ]
         );
     }
@@ -38,7 +36,7 @@ class ListingController extends Controller
         return inertia(
             'Listing/Show',
             [
-                'listing' => $listing
+                'listing' => $listing,
             ]
         );
     }

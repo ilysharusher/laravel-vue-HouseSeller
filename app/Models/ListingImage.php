@@ -12,11 +12,11 @@ class ListingImage extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'image'
+        'image',
     ];
 
     protected $appends = [
-        'img_src'
+        'img_src',
     ];
 
     public function listing(): \Illuminate\Database\Eloquent\Relations\BelongsTo

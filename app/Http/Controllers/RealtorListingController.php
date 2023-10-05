@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Listing\StoreRequest;
 use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
-use Illuminate\Http\Request;
 
 class RealtorListingController extends Controller
 {
@@ -18,11 +17,13 @@ class RealtorListingController extends Controller
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        return inertia('Realtor/Index',
-        [
-            'filters' => request()->only('drafts', 'deleted', 'by', 'order'),
-            'listings' => auth()->user()->listings()->realtorFilter()->paginate(9)->withQueryString()
-        ]);
+        return inertia(
+            'Realtor/Index',
+            [
+                'filters' => request()->only('drafts', 'deleted', 'by', 'order'),
+                'listings' => auth()->user()->listings()->realtorFilter()->paginate(9)->withQueryString(),
+            ]
+        );
     }
 
     public function create(): \Inertia\Response|\Inertia\ResponseFactory
@@ -45,7 +46,7 @@ class RealtorListingController extends Controller
         return inertia(
             'Listing/Show',
             [
-                'listing' => $listing
+                'listing' => $listing,
             ]
         );
     }

@@ -33,7 +33,7 @@ class User extends Authenticatable
 
     protected function password(): Attribute
     {
-        return Attribute::set(fn($value) => bcrypt($value));
+        return Attribute::set(fn ($value) => bcrypt($value));
     }
 
     public function listings(): \Illuminate\Database\Eloquent\Relations\HasMany

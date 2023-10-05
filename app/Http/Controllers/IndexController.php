@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Listing;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class IndexController extends Controller
@@ -15,7 +13,7 @@ class IndexController extends Controller
         return inertia(
             'Index/Index',
             [
-                'message' => 'Hello from Laravel!'
+                'message' => 'Hello from Laravel!',
             ]
         );
     }

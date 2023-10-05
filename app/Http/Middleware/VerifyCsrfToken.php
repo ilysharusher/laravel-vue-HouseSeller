@@ -8,6 +8,6 @@ class VerifyCsrfToken extends Middleware
 {
     protected $except = [
         '/logout',
-        '/realtor/listing/*'
+        '/realtor/listing/*',
     ];
 }

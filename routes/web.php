@@ -1,12 +1,14 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ListingImageController;
+use App\Http\Controllers\ListingOfferController;
+use App\Http\Controllers\RealtorListingController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\{AuthController, LoginController, LogoutController, RegisterController};
-use App\Http\Controllers\{IndexController,
-    ListingController,
-    ListingImageController,
-    ListingOfferController,
-    RealtorListingController};
 
 Route::view('/', 'welcome');
 

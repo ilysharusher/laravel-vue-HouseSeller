@@ -17,16 +17,16 @@ class ListingFactory extends Factory
     public function definition(): array
     {
         return [
-            'area'  => fake()->numberBetween(30, 1_000),
-            'beds'  => fake()->numberBetween(1, 5),
+            'area' => fake()->numberBetween(30, 1_000),
+            'beds' => fake()->numberBetween(1, 5),
             'baths' => fake()->numberBetween(1, 8),
 
-            'city'          => fake()->city,
-            'street'        => fake()->streetName,
+            'city' => fake()->city,
+            'street' => fake()->streetName,
             'street_number' => fake()->buildingNumber,
-            'code'          => fake()->postcode,
+            'code' => fake()->postcode,
 
-            'price' => fake()->numberBetween(10_000, 100_000_000)
+            'price' => fake()->numberBetween(10_000, 100_000_000),
         ];
     }
 }
