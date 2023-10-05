@@ -1,15 +1,24 @@
 <script setup>
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import {useForm, usePage} from '@inertiajs/vue3';
-import {computed} from 'vue';
+import {computed, watch} from 'vue';
+import {debounce} from 'lodash';
 
 const props = defineProps({
     listingId: Number,
     price: Number,
 });
+
+const emit = defineEmits(['offerMade']);
+
 const form = useForm({
     price: props.price,
 });
+
+watch(
+    () => form.price,
+    debounce((value) => emit('offerMade', value), 200),
+);
 
 const submit = () => form.post(
     route('listing.offer.store', props.listingId),

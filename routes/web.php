@@ -8,9 +8,7 @@ use App\Http\Controllers\{IndexController,
     ListingOfferController,
     RealtorListingController};
 
-Route::get('/', function () {
-    return redirect('/listing');
-});
+Route::view('/', 'welcome');
 
 Route::resource('listing', ListingController::class)->only('index', 'show');
 

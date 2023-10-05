@@ -4,17 +4,16 @@ import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import useMonthlyPayment from '@/Composables/useMonthlyPayment.js';
 
 const props = defineProps({
-    listing: {
-        type: Object,
+    offer: {
+        type: Number,
         required: true,
     },
 });
 
-const price = props.listing.price;
 const interestRate = ref(2.5);
 const duration = ref(30);
 
-const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(price, interestRate, duration);
+const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.offer, interestRate, duration);
 </script>
 
 <template>
@@ -41,7 +40,7 @@ const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(price, in
         <div class="flex justify-between">
             <div>Base price</div>
             <div>
-                <ListingPrice :price="listing.price" class="font-medium" />
+                <ListingPrice :price="offer" class="font-medium" />
             </div>
         </div>
         <div class="flex justify-between">

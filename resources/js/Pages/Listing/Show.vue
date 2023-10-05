@@ -5,13 +5,16 @@ import ListingSpace from '@/Components/Listing/ListingSpace.vue';
 import Box from '@/Components/UI/Box.vue';
 import ListingMonthlyPayment from '@/Components/Listing/ListingPayment.vue';
 import MakeOffer from '@/Components/Listing/Show/MakeOffer.vue';
+import {ref} from 'vue';
 
-defineProps({
+const props = defineProps({
     listing: {
         type: Object,
         required: true,
     },
 });
+
+const offer = ref(props.listing.price);
 </script>
 
 <template>
@@ -65,7 +68,7 @@ defineProps({
                 </button>
             </div>-->
 
-            <div 
+            <div
                 v-if="listing.images.length"
                 class="grid grid-cols-1 xl:grid-cols-2 gap-3"
             >
@@ -98,13 +101,13 @@ defineProps({
                 <template #title>
                     Monthly payment
                 </template>
-                <ListingMonthlyPayment :listing="listing" />
+                <ListingMonthlyPayment :offer="offer" />
             </Box>
             <Box>
                 <template #title>
                     Make an offer
                 </template>
-                <MakeOffer :listing-id="listing.id" :price="listing.price" />
+                <MakeOffer :listing-id="listing.id" :price="listing.price" @offer-made="offer = $event" />
             </Box>
         </div>
     </div>
