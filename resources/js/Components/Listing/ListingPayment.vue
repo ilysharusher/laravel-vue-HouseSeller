@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import {computed, ref, watch} from 'vue';
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import useMonthlyPayment from '@/Composables/useMonthlyPayment.js';
 
@@ -13,7 +13,15 @@ const props = defineProps({
 const interestRate = ref(2.5);
 const duration = ref(30);
 
-const { monthlyPayment, totalPaid, totalInterest } = useMonthlyPayment(props.offer, interestRate, duration);
+const monthlyPaymentResult = ref(useMonthlyPayment(props.offer, interestRate.value, duration.value));
+
+const monthlyPayment = computed(() => monthlyPaymentResult.value.monthlyPayment);
+const totalPaid = computed(() => monthlyPaymentResult.value.totalPaid);
+const totalInterest = computed(() => monthlyPaymentResult.value.totalInterest);
+
+watch(() => props.offer, (newValue) =>
+    monthlyPaymentResult.value = useMonthlyPayment(newValue, interestRate.value, duration.value),
+);
 </script>
 
 <template>
