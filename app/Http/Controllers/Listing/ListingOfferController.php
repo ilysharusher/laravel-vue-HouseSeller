@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Listing;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Offer\StoreListingOfferRequest;
-use App\Http\Requests\Offer\UpdateListingOfferRequest;
 use App\Models\Listing;
-use App\Models\Offer;
 
 class ListingOfferController extends Controller
 {

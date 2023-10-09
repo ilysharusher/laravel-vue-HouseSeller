@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Realtor;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Listing\StoreRequest;
 use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;

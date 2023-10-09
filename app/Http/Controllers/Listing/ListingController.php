@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Listing;
 
+use App\Http\Controllers\Controller;
 use App\Models\Listing;
 
 class ListingController extends Controller
@@ -32,11 +33,13 @@ class ListingController extends Controller
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         $listing->load('images');
+        $offerMade = auth()->check() ? $listing->offers()->offer()->first() : null;
 
         return inertia(
             'Listing/Show',
             [
                 'listing' => $listing,
+                'offerMade' => $offerMade,
             ]
         );
     }

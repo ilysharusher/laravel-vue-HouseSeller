@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Listing;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Listing\ListingImage\StoreListingImageRequest;
 use App\Http\Requests\Listing\ListingImage\UpdateListingImageRequest;
 use App\Models\Listing;

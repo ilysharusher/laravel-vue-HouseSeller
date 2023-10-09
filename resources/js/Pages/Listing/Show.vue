@@ -6,15 +6,22 @@ import Box from '@/Components/UI/Box.vue';
 import ListingPayment from '@/Components/Listing/ListingPayment.vue';
 import MakeOffer from '@/Components/Listing/Show/MakeOffer.vue';
 import {ref} from 'vue';
+import {usePage} from '@inertiajs/vue3';
+import OfferMade from '@/Components/Listing/Show/OfferMade.vue';
 
 const props = defineProps({
     listing: {
         type: Object,
         required: true,
     },
+    offerMade: {
+        type: Object,
+        required: false,
+    },
 });
 
 const offer = ref(props.listing.price);
+const user = usePage().props.auth.user;
 </script>
 
 <template>
@@ -55,11 +62,17 @@ const offer = ref(props.listing.price);
                 </template>
                 <ListingPayment :offer="offer" />
             </Box>
-            <Box>
+            <Box v-if="!offerMade">
                 <template #title>
                     Make an offer
                 </template>
                 <MakeOffer :listing-id="listing.id" :price="listing.price" @offer-made="offer = $event" />
+            </Box>
+            <Box v-if="user && offerMade">
+                <template #title>
+                    Offer Made
+                </template>
+                <OfferMade :offer-made="offerMade" />
             </Box>
         </div>
     </div>

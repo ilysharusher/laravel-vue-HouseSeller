@@ -66,7 +66,7 @@ class Listing extends Model
         );
     }
 
-    public function scopeRealtorFilter(Builder $query)
+    public function scopeRealtorFilter(Builder $query): Builder
     {
         return $query->when(
             request()->boolean('deleted') === true,
