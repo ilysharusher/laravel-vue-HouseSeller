@@ -12,7 +12,7 @@ const user = computed(
         <div class="container mx-auto">
             <nav class="p-4 flex items-center justify-between">
                 <div class="text-lg font-medium">
-                    <Link :href="route('listing.index')">Listings</Link>
+                    <Link :href="route('listing.index')">Home</Link>
                 </div>
                 <div class="text-xl text-blue-700 dark:text-blue-300 font-bold text-center">
                     <Link :href="route('listing.index')">HouseSeller</Link>
