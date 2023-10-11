@@ -5,6 +5,7 @@ import ListingPrice from '@/Components/Listing/ListingPrice.vue';
 import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 import { Link } from '@inertiajs/vue3';
 import {computed} from 'vue';
+import Offer from '@/Components/Realtor/Offer.vue';
 
 const props = defineProps({
     listing: Object,
@@ -30,7 +31,7 @@ const hasOffers = computed(() => props.listing.offers.length);
         </Box>
 
         <div v-else class="md:col-span-7 items-center">
-            This is displayed when there are offers!
+            <Offer v-for="offer in listing.offers" :key="offer.id" :offer="offer" :price="listing.price" />
         </div>
 
         <Box class="md:col-span-5">
