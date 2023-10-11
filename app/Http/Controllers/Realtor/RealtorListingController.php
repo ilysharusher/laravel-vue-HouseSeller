@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Listing\StoreRequest;
 use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
+use Illuminate\Http\Request;
 
 class RealtorListingController extends Controller
 {
@@ -22,7 +23,7 @@ class RealtorListingController extends Controller
             'Realtor/Index',
             [
                 'filters' => request()->only('drafts', 'deleted', 'by', 'order'),
-                'listings' => auth()->user()->listings()->realtorFilter()->paginate(9)->withQueryString(),
+                'listings' => auth()->user()->listings()->realtorFilter()->withCount('offers')->paginate(9)->withQueryString(),
             ]
         );
     }
@@ -42,12 +43,10 @@ class RealtorListingController extends Controller
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
-        $listing->load('images');
-
         return inertia(
-            'Listing/Show',
+            'Realtor/Show',
             [
-                'listing' => $listing,
+                'listing' => $listing->load('offers'),
             ]
         );
     }

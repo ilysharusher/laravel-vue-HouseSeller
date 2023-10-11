@@ -37,46 +37,52 @@ defineProps({
 
                     <ListingAdress :listing="listing" />
                 </div>
-                <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-                    <a
-                        :class="{
-                            'opacity-25 pointer-events-none': listing.deleted_at,
-                        }"
-                        class="btn-secondary text-xs font-medium"
-                        :href="route('realtor.listing.show', listing.id)"
-                        target="_blank"
-                    >
-                        Preview
-                    </a>
-                    <Link
-                        :class="{
-                            'opacity-25 pointer-events-none': listing.deleted_at,
-                        }"
-                        class="btn-secondary text-xs font-medium"
-                        :href="route('realtor.listing.edit', listing.id)"
-                        as="button"
-                    >
-                        Edit
-                    </Link>
-                    <Link
-                        v-if="!listing.deleted_at"
-                        class="btn-red text-xs font-medium" 
-                        :href="route('realtor.listing.destroy', listing.id)"
-                        method="delete" 
-                        as="button"
-                    >
-                        Delete
-                    </Link>
-                    <Link
-                        v-else
-                        class="btn-green text-xs font-medium"
-                        :href="route('realtor.listing.restore', listing.id)"
-                        method="patch"
-                        as="button"
-                    >
-                        Restore
-                    </Link>
-                </div>
+                
+                <section>
+                    <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
+                        <a
+                            :class="{
+                                'opacity-25 pointer-events-none': listing.deleted_at,
+                            }"
+                            class="btn-secondary text-xs font-medium"
+                            :href="route('listing.show', listing.id)"
+                            target="_blank"
+                        >
+                            Preview
+                        </a>
+                        <Link
+                            :class="{
+                                'opacity-25 pointer-events-none': listing.deleted_at,
+                            }"
+                            class="btn-secondary text-xs font-medium"
+                            :href="route('realtor.listing.edit', listing.id)"
+                            as="button"
+                        >
+                            Edit
+                        </Link>
+                        <Link
+                            v-if="!listing.deleted_at"
+                            class="btn-red text-xs font-medium"
+                            :href="route('realtor.listing.destroy', listing.id)"
+                            method="delete"
+                            as="button"
+                        >
+                            Delete
+                        </Link>
+                        <Link
+                            v-else
+                            class="btn-green text-xs font-medium"
+                            :href="route('realtor.listing.restore', listing.id)"
+                            method="patch"
+                            as="button"
+                        >
+                            Restore
+                        </Link>
+                    </div>
+                    <div class="mt-2 pr-2">
+                        <Link :href="route('realtor.listing.show', listing.id)" class="btn-primary block w-full">Offers ({{ listing.offers_count }})</Link>
+                    </div>
+                </section>
             </div>
         </Box>
     </section>

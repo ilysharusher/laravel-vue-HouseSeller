@@ -1,21 +1,6 @@
 version: "3"
 
 services:
-#  nginx:
-#    image: nginx
-#    volumes:
-#      - ./:/var/www/
-#      - ./_docker/nginx/conf.d:/etc/nginx/conf.d/
-#    ports:
-#      - "8080:80"
-#    depends_on:
-#      - app
-#  app:
-#    build: ./_docker/app
-#    volumes:
-#      - ./:/var/www/
-#    depends_on:
-#      - db
   db:
     image: mysql
     ports:
@@ -27,10 +12,3 @@ services:
       MYSQL_DATABASE: laravel-vue-HouseSeller
       MYSQL_ROOT_PASSWORD: root
     command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - "8080:80"
-    environment:
-      - PMA_ARBITRARY=1
