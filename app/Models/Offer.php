@@ -14,7 +14,7 @@ class Offer extends Model
 
     protected $fillable = [
         'price',
-        'user_id',
+        'bidder_id',
         'accepted_at',
         'rejected_at',
     ];

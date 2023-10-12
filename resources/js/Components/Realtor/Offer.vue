@@ -16,11 +16,21 @@ const difference = computed(
 const madeOn = computed(
     () => new Date(props.offer.created_at).toDateString(),
 );
+
+const sold = computed(() => props.offer.accepted_at || props.offer.rejected_at);
 </script>
 
 <template>
     <Box>
-        <template #title>Offer #{{ offer.id }}</template>
+        <template #title>
+            Offer #{{ offer.id }}
+            <span v-if="offer.accepted_at" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">
+                Accepted
+            </span>
+            <span v-if="offer.rejected_at" class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">
+                Rejected
+            </span>
+        </template>
 
         <section class="flex items-center justify-between">
             <div>
@@ -41,6 +51,9 @@ const madeOn = computed(
             <div>
                 <Link
                     class="btn-secondary text-xs font-medium"
+                    :class="{
+                        'opacity-25 pointer-events-none': sold,
+                    }"
                     as="button"
                     :href="route('realtor.offer.accept', offer.id)"
                     method="patch"

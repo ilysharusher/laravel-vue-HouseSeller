@@ -43,6 +43,6 @@ class User extends Authenticatable
 
     public function offers(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Offer::class);
+        return $this->hasMany(Offer::class, 'bidder_id');
     }
 }

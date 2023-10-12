@@ -21,11 +21,12 @@ class ListingOfferController extends Controller
     public function store(Listing $listing, StoreListingOfferRequest $request): \Illuminate\Http\RedirectResponse
     {
         $listing->offers()->create([
-            'user_id' => auth()->id(),
+            'bidder_id' => auth()->id(),
             'price' => $request->price,
         ]);
 
-        return redirect()->back()->with('success', 'Offer created successfully');
+        return redirect()->back()
+            ->with('success', 'Offer created successfully');
     }
 
     /*public function show(Offer $listingOffer)
