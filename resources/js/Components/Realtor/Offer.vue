@@ -42,6 +42,8 @@ const madeOn = computed(
                 <Link
                     class="btn-secondary text-xs font-medium"
                     as="button"
+                    :href="route('realtor.offer.accept', offer.id)"
+                    method="patch"
                 >
                     Accept
                 </Link>

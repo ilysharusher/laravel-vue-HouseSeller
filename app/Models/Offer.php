@@ -33,4 +33,9 @@ class Offer extends Model
     {
         return $query->where('bidder_id', auth()->id());
     }
+
+    public function scopeExcept(Builder $query, Offer $offer): Builder
+    {
+        return $query->where('id', '!=', $offer->id);
+    }
 }

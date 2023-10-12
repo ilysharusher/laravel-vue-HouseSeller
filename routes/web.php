@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Listing\ListingController;
 use App\Http\Controllers\Listing\ListingImageController;
 use App\Http\Controllers\Listing\ListingOfferController;
+use App\Http\Controllers\Offer\AcceptOfferController;
 use App\Http\Controllers\Realtor\RealtorListingController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +36,6 @@ Route::middleware('auth')->group(function () {
         Route::delete('listing/{listing}/destroy_all', [ListingImageController::class, 'destroy_all'])->name('listing.image.destroy.all');
         Route::resource('listing', RealtorListingController::class);
         Route::resource('listing.image', ListingImageController::class);
+        Route::patch('offer/{offer}/accept', AcceptOfferController::class)->name('offer.accept');
     });
 });
