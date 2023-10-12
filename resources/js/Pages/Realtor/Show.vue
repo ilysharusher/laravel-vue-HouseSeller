@@ -31,7 +31,7 @@ const hasOffers = computed(() => props.listing.offers.length);
         </Box>
 
         <div v-else class="md:col-span-7 items-center">
-            <Offer v-for="offer in listing.offers" :key="offer.id" :offer="offer" :price="listing.price" :user="listing.user" />
+            <Offer v-for="offer in listing.offers" :key="offer.id" :offer="offer" :price="listing.price" />
         </div>
 
         <Box class="md:col-span-5">

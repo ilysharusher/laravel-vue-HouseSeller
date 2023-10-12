@@ -19,7 +19,7 @@ class Offer extends Model
         'rejected_at',
     ];
 
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function bidder(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -31,6 +31,6 @@ class Offer extends Model
 
     public function scopeOffer(Builder $query): Builder
     {
-        return $query->where('user_id', auth()->id());
+        return $query->where('bidder_id', auth()->id());
     }
 }

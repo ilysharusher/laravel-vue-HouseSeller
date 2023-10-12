@@ -7,7 +7,6 @@ import {computed} from 'vue';
 const props = defineProps({
     offer: Object,
     price: Number,
-    user: Object,
 });
 
 const difference = computed(
@@ -32,7 +31,7 @@ const madeOn = computed(
                 </div>
 
                 <div class="text-gray-500 text-sm">
-                    Made by {{ user.name }}
+                    Made by {{ offer.bidder.name }}
                 </div>
 
                 <div class="text-gray-500 text-sm">
