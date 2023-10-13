@@ -24,6 +24,7 @@ class ListingController extends Controller
                 'listings' => Listing::query()
                     ->latest()
                     ->listingFilter()
+                    ->withoutSold()
                     ->paginate(9)
                     ->withQueryString(),
             ]
