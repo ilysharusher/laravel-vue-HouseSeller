@@ -21,6 +21,7 @@ class Listing extends Model
         'street_number',
         'code',
         'price',
+        'sold_at'
     ];
 
     protected array $sortable = [
@@ -45,10 +46,12 @@ class Listing extends Model
 
     public function scopeWithoutSold(Builder $query): Builder
     {
-        return $query->doesntHave('offers')
+        /*return $query->doesntHave('offers')
             ->orWhereHas('offers',
                 fn(Builder $query) => $query->whereNull('accepted_at')
-        );
+        );*/
+
+        return $query->whereNull('sold_at');
     }
 
     public function scopeListingFilter(Builder $query): Builder

@@ -14,6 +14,10 @@ class AcceptOfferController extends Controller
             'accepted_at' => now()
         ]);
 
+        $offer->listing()->update([
+            'sold_at' => now()
+        ]);
+
         $offer->listing->offers()->except($offer)->update([
             'rejected_at' => now()
         ]);
