@@ -10,6 +10,9 @@ class AcceptOfferController extends Controller
 {
     public function __invoke(Offer $offer): \Illuminate\Http\RedirectResponse
     {
+        $listing = $offer->listing;
+        $this->authorize('update', $listing);
+
         $offer->update([
             'accepted_at' => now()
         ]);
@@ -18,7 +21,7 @@ class AcceptOfferController extends Controller
             'sold_at' => now()
         ]);
 
-        $offer->listing->offers()->except($offer)->update([
+        $listing->offers()->except($offer)->update([
             'rejected_at' => now()
         ]);
 

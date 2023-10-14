@@ -20,6 +20,8 @@ class ListingOfferController extends Controller
 
     public function store(Listing $listing, StoreListingOfferRequest $request): \Illuminate\Http\RedirectResponse
     {
+        $this->authorize('view', $listing);
+
         $listing->offers()->create([
             'bidder_id' => auth()->id(),
             'price' => $request->price,
