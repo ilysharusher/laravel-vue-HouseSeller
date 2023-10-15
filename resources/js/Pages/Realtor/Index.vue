@@ -30,8 +30,13 @@ defineProps({
                         'opacity-25': listing.deleted_at,
                     }"
                 >
-                    <div class="xl:flex items-center gap-2">
-                        <ListingPrice :price="listing.price" class="text-2xl font-medium" />
+                    <div class="xl:flex flex-col gap-2">
+                        <div class="flex items-center">
+                            <ListingPrice :price="listing.price" class="text-2xl font-medium" />
+                            <div v-if="listing.sold_at" class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300 ml-3">
+                                Sold
+                            </div>
+                        </div>
                         <ListingSpace :listing="listing" />
                     </div>
 

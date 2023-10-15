@@ -7,6 +7,7 @@ import {computed} from 'vue';
 const props = defineProps({
     offer: Object,
     price: Number,
+    sold: Boolean,
 });
 
 const difference = computed(
@@ -16,8 +17,6 @@ const difference = computed(
 const madeOn = computed(
     () => new Date(props.offer.created_at).toDateString(),
 );
-
-const sold = computed(() => props.offer.accepted_at || props.offer.rejected_at);
 </script>
 
 <template>
