@@ -6,6 +6,7 @@ import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 import { Link } from '@inertiajs/vue3';
 import RealtorFilters from '@/Components/Realtor/Index/RealtorFilters.vue';
 import Pagination from '@/Components/UI/Pagination.vue';
+import EmptyPlace from "@/Components/UI/EmptyPlace.vue";
 
 defineProps({
     listings: Object,
@@ -14,11 +15,11 @@ defineProps({
 </script>
 
 <template>
-    <h1 class="text-3xl mb-4">Your Listings</h1>
+    <h1 class="text-3xl mb-8">Your Listings</h1>
     <RealtorFilters :filters="filters" />
     <section v-if="listings.data.length" class="grid grid-cols-1 lg:grid-cols-2 gap-2">
-        <Box 
-            v-for="listing in listings.data" 
+        <Box
+            v-for="listing in listings.data"
             :key="listing.id"
             :class="{
                 'border-dashed': listing.deleted_at,
@@ -42,7 +43,7 @@ defineProps({
 
                     <ListingAdress :listing="listing" />
                 </div>
-                
+
                 <section>
                     <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
                         <a
@@ -91,6 +92,13 @@ defineProps({
             </div>
         </Box>
     </section>
+
+    <EmptyPlace v-else>
+        Oops! <br>
+        It looks like you don't have any listings yet :( <br>
+        <span class="text-blue-500"><Link :href="route('realtor.listing.create')">But you can create one here</Link></span>
+    </EmptyPlace>
+
     <div
         v-if="listings.data.length"
         class="py-12 w-full flex justify-center"

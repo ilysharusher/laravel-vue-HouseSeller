@@ -8,6 +8,7 @@ import MakeOffer from '@/Components/Listing/Show/MakeOffer.vue';
 import {ref} from 'vue';
 import {usePage} from '@inertiajs/vue3';
 import OfferMade from '@/Components/Listing/Show/OfferMade.vue';
+import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 
 const props = defineProps({
     listing: {
@@ -26,11 +27,8 @@ const user = usePage().props.auth.user;
 
 <template>
     <div class="flex flex-col-reverse lg:grid lg:grid-cols-12 gap-4">
-        <Box class="lg:col-span-7 flex items-center w-full">
-            <div
-                v-if="listing.images.length"
-                class="grid grid-cols-1 xl:grid-cols-2 gap-3"
-            >
+        <Box v-if="listing.images.length" class="lg:col-span-7 flex items-center w-full">
+            <div class="grid grid-cols-1 xl:grid-cols-2 gap-3">
                 <div
                     v-for="(image, index) in listing.images"
                     :key="index"
@@ -39,14 +37,12 @@ const user = usePage().props.auth.user;
                     <img class="h-auto max-w-full rounded-xl" :src="image.img_src" alt="house image">
                 </div>
             </div>
-
-            <div 
-                v-else 
-                class="w-full text-center font-medium text-gray-500"
-            >
-                No image yet :(
-            </div>
         </Box>
+
+        <EmptyPlace v-else class="lg:col-span-7 flex items-center w-full">
+            No image yet :(
+        </EmptyPlace>
+
         <div class="lg:col-span-5 flex flex-col gap-4">
             <Box>
                 <template #title>

@@ -53,7 +53,7 @@ watch(filterForm,
 </script>
 
 <template>
-    <div class="mb-8 mt-4 flex flex-wrap gap-2">
+    <div class="mb-8 -mt-4 flex flex-wrap gap-2">
         <div class="items-center max-w-full text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg sm:flex dark:bg-gray-700 dark:border-gray-600 dark:text-white my-10">
             <div class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600">
                 <div class="flex items-center pl-3">
