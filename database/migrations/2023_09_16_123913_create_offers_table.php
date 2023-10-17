@@ -10,8 +10,8 @@ return new class () extends Migration {
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\User::class)->constrained();
-            $table->foreignIdFor(\App\Models\Listing::class)->constrained();
+            $table->foreignIdFor(\App\Models\User::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(\App\Models\Listing::class)->constrained()->cascadeOnDelete();
 
             $table->unsignedInteger('price');
 

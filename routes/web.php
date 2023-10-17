@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('listing.offer', ListingOfferController::class);
     Route::prefix('realtor')->name('realtor.')->group(function () {
         Route::patch('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
+        Route::delete('listing/{listing}/destroy_permanently', [RealtorListingController::class, 'destroy_permanently'])->name('listing.destroy.permanently')->withTrashed();
         Route::delete('listing/{listing}/destroy_all', [ListingImageController::class, 'destroy_all'])->name('listing.image.destroy.all');
         Route::resource('listing', RealtorListingController::class);
         Route::resource('listing.image', ListingImageController::class);

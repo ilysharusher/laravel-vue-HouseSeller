@@ -78,6 +78,16 @@ class RealtorListingController extends Controller
             ->with('success', 'Listing deleted successfully.');
     }
 
+    public function destroy_permanently(Listing $listing): \Illuminate\Http\RedirectResponse
+    {
+//        $listing->notifications()->delete();
+
+        $listing->forceDelete();
+
+        return redirect()->back()
+            ->with('success', 'Listing permanently deleted successfully.');
+    }
+
     public function restore(Listing $listing): \Illuminate\Http\RedirectResponse
     {
         $listing->restore();

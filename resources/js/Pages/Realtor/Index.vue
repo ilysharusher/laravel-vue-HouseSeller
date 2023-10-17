@@ -6,7 +6,7 @@ import ListingAdress from '@/Components/Listing/ListingAdress.vue';
 import { Link } from '@inertiajs/vue3';
 import RealtorFilters from '@/Components/Realtor/Index/RealtorFilters.vue';
 import Pagination from '@/Components/UI/Pagination.vue';
-import EmptyPlace from "@/Components/UI/EmptyPlace.vue";
+import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 
 defineProps({
     listings: Object,
@@ -47,6 +47,7 @@ defineProps({
                 <section>
                     <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
                         <a
+                            v-if="!listing.deleted_at"
                             :class="{
                                 'opacity-25 pointer-events-none': listing.deleted_at,
                             }"
@@ -57,6 +58,7 @@ defineProps({
                             Preview
                         </a>
                         <Link
+                            v-if="!listing.deleted_at"
                             :class="{
                                 'opacity-25 pointer-events-none': listing.deleted_at,
                             }"
@@ -65,6 +67,15 @@ defineProps({
                             as="button"
                         >
                             Edit
+                        </Link>
+                        <Link
+                            v-else
+                            :href="route('realtor.listing.destroy.permanently', listing.id)"
+                            class="btn-red block w-full"
+                            method="delete"
+                            as="button"
+                        >
+                            Delete permanently
                         </Link>
                         <Link
                             v-if="!listing.deleted_at"
@@ -85,7 +96,7 @@ defineProps({
                             Restore
                         </Link>
                     </div>
-                    <div class="mt-2 pr-2">
+                    <div v-if="!listing.deleted_at" class="mt-2 pr-2">
                         <Link :href="route('realtor.listing.show', listing.id)" class="btn-primary block w-full">Offers ({{ listing.offers_count }})</Link>
                     </div>
                 </section>
