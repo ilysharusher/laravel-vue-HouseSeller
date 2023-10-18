@@ -1,7 +1,7 @@
 <script setup>
 import {Link, usePage} from '@inertiajs/vue3';
 import {computed} from 'vue';
-import NotificationButton from "@/Components/Buttons/NotificationButton.vue";
+import NotificationButton from '@/Components/Buttons/NotificationButton.vue';
 
 const user = computed(
     () => usePage().props.auth.user,

@@ -80,8 +80,6 @@ class RealtorListingController extends Controller
 
     public function destroy_permanently(Listing $listing): \Illuminate\Http\RedirectResponse
     {
-//        $listing->notifications()->delete();
-
         $listing->forceDelete();
 
         return redirect()->back()
