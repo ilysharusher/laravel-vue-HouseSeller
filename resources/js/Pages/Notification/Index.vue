@@ -19,7 +19,6 @@ defineProps({
             class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 lg:flex justify-between"
         >
             <div>
-                {{ notification }}
                 <h5
                     v-if="notification.type === 'App\\Notifications\\OfferMade'"
                     class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
@@ -31,7 +30,7 @@ defineProps({
                     <ListingPrice :price="notification.data.offer_price" />
                     for
                     <Link :href="route('realtor.listing.show', notification.data.listing_id)" class="text-blue-500">this listing</Link>
-                    was made by {{ notification.data.bidder_id }}
+                    was made!
                 </p>
             </div>
             <Link
