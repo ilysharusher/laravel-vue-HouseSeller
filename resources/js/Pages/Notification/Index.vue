@@ -16,7 +16,10 @@ defineProps({
         <div
             v-for="(notification, id) in notifications.data"
             :key="id"
-            class="w-full p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 lg:flex justify-between"
+            class="w-full p-6 bg-white border border-gray-200 rounded-2xl shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 lg:flex justify-between my-5"
+            :class="{
+                'pointer-events-none opacity-25': notification.read_at,
+            }"
         >
             <div>
                 <h5
@@ -34,9 +37,9 @@ defineProps({
                 </p>
             </div>
             <Link
-                :class="{
-                    'opacity-25 pointer-events-none': notification.read_at,
-                }"
+                v-if="!notification.read_at"
+                :href="route('mark.notification.as.read', notification.id)"
+                method="patch"
                 class="btn-secondary flex items-center justify-center mt-5 lg:mt-0"
             >
                 Mark as read

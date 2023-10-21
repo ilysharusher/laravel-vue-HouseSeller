@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Listing\ListingController;
 use App\Http\Controllers\Listing\ListingImageController;
 use App\Http\Controllers\Listing\ListingOfferController;
+use App\Http\Controllers\Notification\MarkNotificationAsRead;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Offer\AcceptOfferController;
 use App\Http\Controllers\Realtor\RealtorListingController;
@@ -33,6 +34,7 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::resource('listing.offer', ListingOfferController::class);
     Route::resource('notification', NotificationController::class)->only('index');
+    Route::patch('notification/{notification}/mark_as_read', MarkNotificationAsRead::class)->name('mark.notification.as.read');
     Route::prefix('realtor')->name('realtor.')->group(function () {
         Route::patch('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name('listing.restore')->withTrashed();
         Route::delete('listing/{listing}/destroy_permanently', [RealtorListingController::class, 'destroy_permanently'])->name('listing.destroy.permanently')->withTrashed();
