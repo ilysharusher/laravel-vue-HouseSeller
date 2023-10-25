@@ -14,7 +14,7 @@ const formattedDate = new Intl.DateTimeFormat('en-US', {
     hour: '2-digit',
     minute: '2-digit',
     hour12: false,
-}).format(new Date(props.notification.created_at)).replace(/\//g, '-');
+}).format(new Date(props.notification.created_at)).replace(/\//g, '-').replace(/,/, ' at');
 </script>
 
 <template>
