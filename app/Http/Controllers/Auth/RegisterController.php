@@ -5,14 +5,16 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
     public function __invoke(RegisterRequest $request): \Illuminate\Http\RedirectResponse
     {
-        auth()->login(
-            User::query()->create($request->validated())
-        );
+        $user = User::query()->create($request->validated());
+        auth()->login($user);
+
+        event(new Registered($user));
 
         return redirect()
             ->route('listing.index')
