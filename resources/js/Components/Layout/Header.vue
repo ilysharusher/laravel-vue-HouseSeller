@@ -12,10 +12,7 @@ const user = computed(
     <header class="bg-white dark:bg-gray-900 w-full">
         <div class="container mx-auto">
             <nav class="p-4 flex items-center justify-between">
-                <div class="text-lg font-medium">
-                    <Link :href="route('listing.index')">Home</Link>
-                </div>
-                <div class="text-xl text-blue-700 dark:text-blue-300 font-bold text-center">
+                <div class="text-3xl text-blue-700 dark:text-blue-300 font-bold text-center">
                     <Link :href="route('listing.index')">HouseSeller</Link>
                 </div>
                 <div v-if="user" class="flex items-center gap-4">
