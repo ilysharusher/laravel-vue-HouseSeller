@@ -5,17 +5,12 @@ defineProps({
         required: true,
     },
 });
-
 </script>
 
 <template>
-    {{ listing.city }}
-    |
-    {{ listing.street }}
-    |
-    {{ listing.street_number }}
-    |
-    {{ listing.code }}
+    <div>
+        {{ listing.street }} {{ listing.street_number }}, {{ listing.city }}
+    </div>
 </template>
 
 <style scoped>

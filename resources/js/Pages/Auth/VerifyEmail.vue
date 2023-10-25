@@ -9,6 +9,7 @@ import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
             <p>Oops! It looks like you haven't verified your email yet :(</p>
             <Link
                 :href="route('verification.send')"
+                as="button"
                 method="post"
                 class="text-blue-500"
             >

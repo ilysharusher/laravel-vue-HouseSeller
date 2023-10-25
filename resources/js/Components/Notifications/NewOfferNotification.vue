@@ -1,11 +1,20 @@
 <script setup>
 import {Link} from '@inertiajs/vue3';
 import ListingPrice from '@/Components/Listing/ListingPrice.vue';
-import MarkAsReadNotificatioButton from '@/Components/Buttons/MarkAsReadNotificatioButton.vue';
+import MarkAsReadNotificationButton from '@/Components/Buttons/MarkAsReadNotificationButton.vue';
 
-defineProps({
+const props = defineProps({
     notification: Object,
 });
+
+const formattedDate = new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+}).format(new Date(props.notification.created_at)).replace(/\//g, '-');
 </script>
 
 <template>
@@ -16,11 +25,15 @@ defineProps({
         }"
     >
         <div>
+            <div class="font-medium text-gray-500">
+                {{ formattedDate }}
+            </div>
             <h5
                 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"
             >
                 Offer was made!
             </h5>
+
             <p class="font-normal text-gray-700 dark:text-gray-400">
                 Offer
                 <ListingPrice :price="notification.data.offer_price" />
@@ -30,7 +43,7 @@ defineProps({
             </p>
         </div>
 
-        <MarkAsReadNotificatioButton :notification="notification" />
+        <MarkAsReadNotificationButton :notification="notification" />
     </div>
 </template>
 

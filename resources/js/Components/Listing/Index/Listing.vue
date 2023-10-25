@@ -15,7 +15,7 @@ const props = defineProps({
 
 const { monthlyPayment } = useMonthlyPayment(props.listing.price, 2.5, 30);
 </script>
-    
+
 <template>
     <Box>
         <div>
@@ -30,7 +30,6 @@ const { monthlyPayment } = useMonthlyPayment(props.listing.price, 2.5, 30);
                 <ListingAdress :listing="listing" class="text-gray-500" />
             </Link>
         </div>
-        <br />
     </Box>
 </template>
 
