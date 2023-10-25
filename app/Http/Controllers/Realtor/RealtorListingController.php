@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Listing\StoreRequest;
 use App\Http\Requests\Listing\UpdateRequest;
 use App\Models\Listing;
-use Illuminate\Http\Request;
 
 class RealtorListingController extends Controller
 {

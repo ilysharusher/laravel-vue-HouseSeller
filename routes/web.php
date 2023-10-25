@@ -3,7 +3,6 @@
 use App\Http\Controllers\Auth\VerifyEmail\SendVerificationEmail;
 use App\Http\Controllers\Auth\VerifyEmail\VerificationNotice;
 use App\Http\Controllers\Auth\VerifyEmail\VerificationProcess;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -15,7 +14,6 @@ use App\Http\Controllers\Notification\MarkNotificationAsRead;
 use App\Http\Controllers\Notification\NotificationController;
 use App\Http\Controllers\Offer\AcceptOfferController;
 use App\Http\Controllers\Realtor\RealtorListingController;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -56,7 +54,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->name(
             'listing.restore'
         )->withTrashed();
-        Route::delete('listing/{listing}/destroy_permanently', [RealtorListingController::class, 'destroy_permanently']
+        Route::delete(
+            'listing/{listing}/destroy_permanently',
+            [RealtorListingController::class, 'destroy_permanently']
         )->name('listing.destroy.permanently')->withTrashed();
         Route::delete('listing/{listing}/destroy_all', [ListingImageController::class, 'destroy_all'])->name(
             'listing.image.destroy.all'

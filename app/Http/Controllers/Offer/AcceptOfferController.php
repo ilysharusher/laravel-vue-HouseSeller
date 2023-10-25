@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Offer;
 
 use App\Http\Controllers\Controller;
 use App\Models\Offer;
-use Illuminate\Http\Request;
 
 class AcceptOfferController extends Controller
 {

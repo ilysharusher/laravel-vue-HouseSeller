@@ -58,22 +58,22 @@ class Listing extends Model
     {
         return $query->when(
             request()->filled('priceFrom'),
-            fn($query) => $query->where('price', '>=', request('priceFrom'))
+            fn ($query) => $query->where('price', '>=', request('priceFrom'))
         )->when(
             request()->filled('priceTo'),
-            fn($query) => $query->where('price', '<=', request('priceTo'))
+            fn ($query) => $query->where('price', '<=', request('priceTo'))
         )->when(
             request()->filled('beds'),
-            fn($query) => $query->where('beds', (int)request('beds') <= 5 ? '=' : '>=', request('beds'))
+            fn ($query) => $query->where('beds', (int)request('beds') <= 5 ? '=' : '>=', request('beds'))
         )->when(
             request()->filled('baths'),
-            fn($query) => $query->where('baths', (int)request('baths') <= 5 ? '=' : '>=', request('baths'))
+            fn ($query) => $query->where('baths', (int)request('baths') <= 5 ? '=' : '>=', request('baths'))
         )->when(
             request()->filled('areaFrom'),
-            fn($query) => $query->where('area', '>=', request('areaFrom'))
+            fn ($query) => $query->where('area', '>=', request('areaFrom'))
         )->when(
             request()->filled('areaTo'),
-            fn($query) => $query->where('area', '<=', request('areaTo'))
+            fn ($query) => $query->where('area', '<=', request('areaTo'))
         );
     }
 
@@ -81,10 +81,10 @@ class Listing extends Model
     {
         return $query->when(
             request()->boolean('deleted') === true,
-            fn($query) => $query->withTrashed()
+            fn ($query) => $query->withTrashed()
         )->when(
             request()->filled('by'),
-            fn($query) => in_array(request('by'), $this->sortable) ? $query->orderBy(
+            fn ($query) => in_array(request('by'), $this->sortable) ? $query->orderBy(
                 request('by'),
                 request('order', 'asc')
             ) : $query
