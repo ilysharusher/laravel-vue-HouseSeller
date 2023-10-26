@@ -2,6 +2,7 @@
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 import Pagination from '@/Components/UI/Pagination.vue';
 import NewOfferNotification from '@/Components/Notifications/NewOfferNotification.vue';
+import {Link} from '@inertiajs/vue3';
 
 defineProps({
     notifications: Object,
@@ -9,7 +10,18 @@ defineProps({
 </script>
 
 <template>
-    <h1 class="text-3xl mb-4">Your Notifications</h1>
+    <div class="flex justify-between">
+        <h1 class="text-3xl mb-4">Your Notifications</h1>
+        <Link
+            :href="route('notification.destroy_all')"
+            method="delete"
+            as="button"
+            class="btn-secondary"
+            :class="{'opacity-25 pointer-events-none': notifications.data.length === 0}"
+        >
+            Delete All
+        </Link>
+    </div>
 
     <section v-if="notifications.data.length">
         <div

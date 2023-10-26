@@ -22,7 +22,7 @@ defineEmits({
             <div class="flex flex-nowrap items-center">
                 <select
                     v-model="filterForm.beds"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-lg focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 min-w-[100px]"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l-xl focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 min-w-[100px]"
                 >
                     <option :value="null">Beds</option>
                     <option v-for="i in 5" :key="i" :value="i">{{ i }}</option>
@@ -31,7 +31,7 @@ defineEmits({
 
                 <select
                     v-model="filterForm.baths"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-lg focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 min-w-[100px]"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-r-xl focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500 min-w-[100px]"
                 >
                     <option :value="null">Baths</option>
                     <option v-for="i in 5" :key="i" :value="i">{{ i }}</option>

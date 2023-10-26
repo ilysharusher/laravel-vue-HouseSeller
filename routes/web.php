@@ -1,17 +1,9 @@
 <?php
 
-use App\Http\Controllers\Auth\VerifyEmail\SendVerificationEmail;
-use App\Http\Controllers\Auth\VerifyEmail\VerificationNotice;
-use App\Http\Controllers\Auth\VerifyEmail\VerificationProcess;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Listing\ListingController;
-use App\Http\Controllers\Listing\ListingImageController;
-use App\Http\Controllers\Listing\ListingOfferController;
-use App\Http\Controllers\Notification\MarkNotificationAsRead;
-use App\Http\Controllers\Notification\NotificationController;
+use App\Http\Controllers\Auth\VerifyEmail\{SendVerificationEmail, VerificationNotice, VerificationProcess};
+use App\Http\Controllers\Auth\{AuthController, LoginController, LogoutController, RegisterController};
+use App\Http\Controllers\Listing\{ListingController, ListingImageController, ListingOfferController};
+use App\Http\Controllers\Notification\{DeleteAllNotifications, MarkNotificationAsRead, NotificationController};
 use App\Http\Controllers\Offer\AcceptOfferController;
 use App\Http\Controllers\Realtor\RealtorListingController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +39,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('listing.offer', ListingOfferController::class);
     Route::resource('notification', NotificationController::class)->only('index');
+    Route::delete('notification.destroy_all', DeleteAllNotifications::class)->name('notification.destroy_all');
     Route::patch('notification/{notification}/mark_as_read', MarkNotificationAsRead::class)->name(
         'mark.notification.as.read'
     );
