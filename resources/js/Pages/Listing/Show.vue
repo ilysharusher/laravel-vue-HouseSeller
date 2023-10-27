@@ -9,6 +9,8 @@ import {ref} from 'vue';
 import {usePage} from '@inertiajs/vue3';
 import OfferMade from '@/Components/Listing/Show/OfferMade.vue';
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
+import UnsuccessAlert from '@/Components/Alerts/UnsuccessAlert.vue';
+import InfoAlert from '@/Components/Alerts/InfoAlert.vue';
 
 const props = defineProps({
     listing: {
@@ -52,17 +54,27 @@ const user = usePage().props.auth.user;
                 <ListingSpace :listing="listing" class="text-lg" />
                 <ListingAdress :listing="listing" class="text-gray-500" />
             </Box>
+            <InfoAlert v-if="user?.id === listing.user_id" class="-mb-0.5" flash-info="This is your listing. You can see more detailed statistics in your personal cabinet." />
             <Box>
                 <template #title>
                     Monthly payment
                 </template>
-                <ListingPayment :offer="offer" />
+                <ListingPayment
+                    :class="{
+                        'opacity-25 pointer-events-none': !user || listing.user_id === user.id,
+                    }" :offer="offer"
+                />
             </Box>
+            <UnsuccessAlert v-if="!user" class="-mb-0.5" flash-unsuccess="Sign in to your account to make offers." />
             <Box v-if="!offerMade">
                 <template #title>
                     Make an offer
                 </template>
-                <MakeOffer :listing-id="listing.id" :price="listing.price" @offer-made="offer = $event" />
+                <MakeOffer
+                    :class="{
+                        'opacity-25 pointer-events-none': !user || listing.user_id === user.id,
+                    }" :listing-id="listing.id" :price="listing.price" @offer-made="offer = $event"
+                />
             </Box>
             <Box v-if="user && offerMade">
                 <template #title>

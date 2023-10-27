@@ -17,6 +17,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('listing.index'));
+        return redirect()->intended(route('listing.index'))
+            ->with('success', 'You have been logged in.');
     }
 }

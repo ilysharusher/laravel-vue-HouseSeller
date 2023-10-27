@@ -18,6 +18,6 @@ class RegisterController extends Controller
 
         return redirect()
             ->route('listing.index')
-            ->with('success', 'You have been registered.');
+            ->with('success', 'You have been registered. Please check your email for verification.');
     }
 }

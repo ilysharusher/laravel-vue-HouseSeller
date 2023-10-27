@@ -10,7 +10,9 @@ class VerifyImageUpload
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $request->hasFile('images');
+        if (!$request->hasFile('images')) {
+            return back()->with('unsuccess', 'No images uploaded.');
+        }
 
         return $next($request);
     }

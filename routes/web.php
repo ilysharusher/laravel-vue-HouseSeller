@@ -26,7 +26,7 @@ Route::prefix('auth')->group(function () {
     });
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'protect.email.verification'])->group(function () {
     Route::get('/email/verify', VerificationNotice::class)->name('verification.notice');
 
     Route::get('/email/verify/{id}/{hash}', VerificationProcess::class)

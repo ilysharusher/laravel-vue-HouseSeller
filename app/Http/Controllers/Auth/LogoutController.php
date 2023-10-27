@@ -15,6 +15,7 @@ class LogoutController extends Controller
 
         request()->session()->regenerateToken();
 
-        return redirect()->route('listing.index');
+        return redirect()->route('listing.index')
+            ->with('success', 'You have been logged out.');
     }
 }
