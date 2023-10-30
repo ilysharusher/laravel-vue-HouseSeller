@@ -10,13 +10,10 @@ use App\Notifications\OfferMade;
 
 class ListingOfferController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Offer::class);
-    }
-
     public function store(Listing $listing, StoreListingOfferRequest $request): \Illuminate\Http\RedirectResponse
     {
+        $this->authorize('create', [Offer::class, $listing]);
+
         $offer = $listing->offers()->create([
             'bidder_id' => auth()->id(),
             'price' => $request->price,

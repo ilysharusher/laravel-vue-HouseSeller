@@ -54,7 +54,7 @@ const user = usePage().props.auth.user;
                 <ListingSpace :listing="listing" class="text-lg" />
                 <ListingAdress :listing="listing" class="text-gray-500" />
             </Box>
-            <InfoAlert v-if="user?.id === listing.user_id" class="-mb-0.5" flash-info="This is your listing. You can see more detailed statistics in your personal cabinet." />
+            <InfoAlert v-if="user?.id === listing.user_id" flash-info="This is your listing. You can see more detailed statistics in your personal cabinet." />
             <Box>
                 <template #title>
                     Monthly payment

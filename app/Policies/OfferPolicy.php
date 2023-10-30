@@ -6,7 +6,7 @@ use App\Models\Listing;
 use App\Models\Offer;
 use App\Models\User;
 
-class makeOfferPolicy
+class OfferPolicy
 {
     public function viewAny(User $user): bool
     {
