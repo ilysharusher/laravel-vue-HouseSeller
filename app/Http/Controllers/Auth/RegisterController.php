@@ -9,7 +9,12 @@ use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
-    public function __invoke(RegisterRequest $request): \Illuminate\Http\RedirectResponse
+    public function register(): \Inertia\Response|\Inertia\ResponseFactory
+    {
+        return inertia('Auth/Register');
+    }
+
+    public function register_store(RegisterRequest $request): \Illuminate\Http\RedirectResponse
     {
         $user = User::query()->create($request->validated());
         auth()->login($user);

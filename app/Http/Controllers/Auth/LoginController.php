@@ -7,7 +7,12 @@ use App\Http\Requests\Auth\LoginRequest;
 
 class LoginController extends Controller
 {
-    public function __invoke(LoginRequest $request): \Illuminate\Http\RedirectResponse
+    public function login(): \Inertia\Response|\Inertia\ResponseFactory
+    {
+        return inertia('Auth/Login');
+    }
+
+    public function login_store(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
         if (! auth()->attempt($request->validated(), true)) {
             return back()->withErrors([
