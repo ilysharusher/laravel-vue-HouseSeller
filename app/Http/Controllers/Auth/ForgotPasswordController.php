@@ -42,9 +42,8 @@ class ForgotPasswordController extends Controller
         $status = Password::reset(
             $request->validated(),
             function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => bcrypt($password)
-                ])->setRememberToken(Str::random(60));
+                $user->setRememberToken(Str::random(60));
+                $user->password = $password;
 
                 $user->save();
 

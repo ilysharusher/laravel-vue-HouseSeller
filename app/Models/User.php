@@ -32,12 +32,6 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         'password' => 'hashed',
     ];
 
-    // TODO Fix this
-    /*protected function password(): Attribute
-    {
-        return Attribute::set(fn ($value) => bcrypt($value));
-    }*/
-
     public function listings(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Listing::class);
