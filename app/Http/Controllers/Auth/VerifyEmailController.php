@@ -15,7 +15,11 @@ class VerifyEmailController extends Controller
 
     public function send_verification_email(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $request->user()->sendEmailVerificationNotification();
+        $user = $request->user();
+
+        dispatch(function () use ($user) {
+            $user->sendEmailVerificationNotification();
+        });
 
         return back()->with(
             'success',

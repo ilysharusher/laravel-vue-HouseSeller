@@ -14,7 +14,7 @@ class LoginController extends Controller
 
     public function login_store(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
-        if (! auth()->attempt($request->validated(), true)) {
+        if (!auth()->attempt($request->validated(), true)) {
             return back()->withErrors([
                 'email' => 'The provided credentials do not match our records.',
             ]);

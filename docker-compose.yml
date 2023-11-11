@@ -1,13 +1,21 @@
 version: "3"
 
 services:
-    db:
+    redis:
+        image: redis
+        restart: always
+        ports:
+            - "6379:6379"
+        volumes:
+            - ./tmp/redis:/data
+        command: redis-server
+    mysql:
         image: mysql
         ports:
             - "3306:3306"
         restart: always
         volumes:
-            - ./tmp/db:/var/lib/mysql
+            - ./tmp/mysql:/var/lib/mysql
         environment:
             MYSQL_DATABASE: laravel-vue-HouseSeller
             MYSQL_ROOT_PASSWORD: root
