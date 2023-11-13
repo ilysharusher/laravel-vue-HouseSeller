@@ -42,6 +42,8 @@ class RealtorListingController extends Controller
 
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
+        $this->authorize('viewRealtor', $listing);
+
         return inertia(
             'Realtor/Show',
             [
