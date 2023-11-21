@@ -44,6 +44,11 @@ class Listing extends Model
         return $this->hasMany(Offer::class);
     }
 
+    public function messages(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Message::class);
+    }
+
     public function scopeWithoutSold(Builder $query): Builder
     {
         /*return $query->doesntHave('offers')
