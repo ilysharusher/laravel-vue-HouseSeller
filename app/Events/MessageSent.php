@@ -14,8 +14,10 @@ class MessageSent implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public function __construct()
-    {
+    public function __construct(
+        private readonly \App\Models\User $user,
+        private readonly \App\Models\Message $message
+    ) {
         //
     }
 
@@ -23,6 +25,22 @@ class MessageSent implements ShouldBroadcast
     {
         return [
             new PrivateChannel('chat'),
+        ];
+    }
+
+    public function broadcastAs(): string
+    {
+        return 'message.sent';
+    }
+
+    public function broadcastWith(): array
+    {
+        return [
+            'message' => $this->message->message,
+            'user' => [
+                'id' => $this->user->id,
+                'name' => $this->user->name,
+            ],
         ];
     }
 }

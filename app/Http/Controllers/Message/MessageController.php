@@ -2,65 +2,31 @@
 
 namespace App\Http\Controllers\Message;
 
+use App\Events\MessageSent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Message\MessageFormRequest;
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        //
+        return inertia('Message/Index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function messages(): \Illuminate\Database\Eloquent\Collection|array
     {
-        //
+        return Message::with('user')->get();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function send(MessageFormRequest $request): Message
     {
-        //
-    }
+        $message = $request->user()->messages()->create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Message $message)
-    {
-        //
-    }
+        broadcast(new MessageSent($request->user(), $message));
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Message $message)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Message $message)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Message $message)
-    {
-        //
+        return $message;
     }
 }

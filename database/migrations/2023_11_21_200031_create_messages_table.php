@@ -14,10 +14,10 @@ return new class extends Migration {
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignIdFor(\App\Models\Listing::class)
+            /*$table->foreignIdFor(\App\Models\Listing::class)
                 ->constrained()
                 ->cascadeOnDelete()
-                ->cascadeOnUpdate();
+                ->cascadeOnUpdate();*/
             $table->text('message');
 
             $table->timestamps();
