@@ -13,7 +13,13 @@ return new class () extends Migration {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
 
-            $table->string('users')->unique();
+            $table->string('users');
+            $table->foreignIdFor(\App\Models\Listing::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
+            $table->unique(['users', 'listing_id']);
 
             $table->timestamps();
         });

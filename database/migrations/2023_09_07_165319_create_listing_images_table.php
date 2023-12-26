@@ -12,7 +12,8 @@ return new class () extends Migration {
 
             $table->foreignIdFor(\App\Models\Listing::class)
                 ->constrained()
-                ->cascadeOnDelete();
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
             $table->string('image');
 
             $table->timestamps();
