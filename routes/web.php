@@ -7,9 +7,9 @@ use App\Http\Controllers\Offer\AcceptOfferController;
 use App\Http\Controllers\Realtor\RealtorListingController;
 use Illuminate\Support\Facades\Route;
 
-/*Route::get('/', function () {
+Route::get('/', function () {
     return redirect()->route('listing.index');
-});*/
+});
 
 Route::resource('listing', ListingController::class)->only('index', 'show');
 
@@ -38,7 +38,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     Route::controller(MessageController::class)->group(function () {
-        Route::get('/', 'index')->name('message.index');
+        Route::get('/chat', 'index')->name('message.index');
         Route::get('/messages', 'messages');
         Route::post('/send', 'send');
     });

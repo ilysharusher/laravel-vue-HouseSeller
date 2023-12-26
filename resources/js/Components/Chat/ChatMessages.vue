@@ -1,25 +1,18 @@
 <script setup>
-import useChat from '@/Composables/Chat.js';
-import {onMounted} from 'vue';
 import {usePage} from '@inertiajs/vue3';
 import UserMessage from '@/Components/Chat/Message/UserMessage.vue';
 import InterlocutorMessage from '@/Components/Chat/Message/InterlocutorMessage.vue';
 
-const {messages, getMessages} = useChat();
+const userID = usePage().props.auth.user.id;
 
-onMounted(() => {
-    getMessages();
-});
-
-window.Echo.private('chat')
+window.Echo.private(`chat.${userID}`)
     .listen('.message.sent', (e) => {
-        messages.value.push({
+        /*messages.value.push({
             message: e.message,
             user_id: e.user.id,
-        });
+        });*/
+        console.log(e);
     });
-
-const userID = usePage().props.auth.user.id;
 </script>
 
 <template>

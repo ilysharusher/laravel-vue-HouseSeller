@@ -2,23 +2,21 @@
 
 namespace App\Broadcasting;
 
+use App\Models\Listing;
 use App\Models\User;
 
 class ChatChannel
 {
-    /**
-     * Create a new channel instance.
-     */
     public function __construct()
     {
         //
     }
 
-    /**
-     * Authenticate the user's access to the channel.
-     */
-    public function join(User $user): array|bool
+    public function join(User $user, Listing $listing): array|bool
     {
-        return auth()->check();
+        return auth()->check() && ($user->is($listing->user) || $listing->offers()->where(
+            'bidder_id',
+            $user->id
+        )->exists());
     }
 }
