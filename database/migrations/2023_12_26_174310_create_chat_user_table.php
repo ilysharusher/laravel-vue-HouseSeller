@@ -5,33 +5,32 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class () extends Migration {
+    /**
+     * Run the migrations.
+     */
     public function up(): void
     {
-        Schema::create('offers', function (Blueprint $table) {
+        Schema::create('chat_user', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignIdFor(\App\Models\User::class, 'bidder_id')
-                ->constrained('users')
+            $table->foreignIdFor(\App\Models\Chat::class)
+                ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignIdFor(\App\Models\Listing::class)
+            $table->foreignIdFor(\App\Models\User::class)
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
 
-            $table->unsignedInteger('price');
-
-            $table->timestamp('accepted_at')->nullable();
-            $table->timestamp('rejected_at')->nullable();
-
             $table->timestamps();
-
-            $table->softDeletes();
         });
     }
 
+    /**
+     * Reverse the migrations.
+     */
     public function down(): void
     {
-        Schema::dropIfExists('offers');
+        Schema::dropIfExists('chat_user');
     }
 };

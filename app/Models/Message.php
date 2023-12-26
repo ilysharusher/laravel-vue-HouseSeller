@@ -10,9 +10,9 @@ class Message extends Model
     use HasFactory;
 
     protected $fillable = [
+        'chat_id',
         'user_id',
-        'listing_id',
-        'message'
+        'text',
     ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -20,8 +20,13 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function listing(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function getTimeAttribute(): string
     {
-        return $this->belongsTo(Listing::class);
+        return $this->created_at->diffForHumans();
+    }
+
+    public function getIsOwnerAttribute(): bool
+    {
+        return (int) $this->user_id === (int) auth()->id();
     }
 }

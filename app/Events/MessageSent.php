@@ -2,9 +2,8 @@
 
 namespace App\Events;
 
-use Illuminate\Broadcasting\Channel;
+use App\Models\{Listing, Message, User};
 use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
@@ -12,11 +11,14 @@ use Illuminate\Queue\SerializesModels;
 
 class MessageSent implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public function __construct(
-        private readonly \App\Models\User $user,
-        private readonly \App\Models\Message $message
+        private readonly User $user,
+        private readonly Listing $listing,
+        private readonly Message $message
     ) {
         //
     }
@@ -24,7 +26,7 @@ class MessageSent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chat'),
+            new PrivateChannel('chats' . $this->listing->id),
         ];
     }
 
@@ -37,6 +39,9 @@ class MessageSent implements ShouldBroadcast
     {
         return [
             'message' => $this->message->message,
+            'listing' => [
+                'id' => $this->listing->id,
+            ],
             'user' => [
                 'id' => $this->user->id,
                 'name' => $this->user->name,

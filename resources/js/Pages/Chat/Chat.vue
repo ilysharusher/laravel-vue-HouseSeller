@@ -1,15 +1,8 @@
 <script setup>
 
-import ChatForm from '@/Components/Chat/ChatForm.vue';
 import ChatMessages from '@/Components/Chat/ChatMessages.vue';
-import useChat from '@/Composables/Chat.js';
 import UnsuccessAlert from '@/Components/Alerts/UnsuccessAlert.vue';
-
-const {errors, addMessage} = useChat();
-
-const sendMessage = async (form) => {
-    await addMessage(form);
-};
+import ChatForm from '@/Components/Chat/ChatForm.vue';
 </script>
 
 <template>

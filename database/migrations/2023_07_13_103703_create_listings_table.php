@@ -10,6 +10,11 @@ return new class () extends Migration {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignIdFor(\App\Models\User::class)
+                ->constrained()
+                ->cascadeOnDelete()
+                ->cascadeOnUpdate();
+
             $table->unsignedSmallInteger('area');
             $table->unsignedTinyInteger('beds');
             $table->unsignedTinyInteger('baths');
@@ -20,6 +25,8 @@ return new class () extends Migration {
             $table->tinyText('code');
 
             $table->unsignedInteger('price');
+
+            $table->timestamp('sold_at')->nullable();
 
             $table->timestamps();
 
