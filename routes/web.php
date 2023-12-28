@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Chat\ChatController;
+use App\Http\Controllers\Message\LoadMessagesController;
 use App\Http\Controllers\Message\MessageController;
+use App\Http\Controllers\MessageStatus\UpdateMessageStatusController;
 use App\Http\Controllers\Listing\{ListingController, ListingImageController, ListingOfferController};
 use App\Http\Controllers\Notification\{DeleteAllNotifications, MarkNotificationAsRead, NotificationController};
 use App\Http\Controllers\Offer\AcceptOfferController;
@@ -37,9 +40,25 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::patch('offer/{offer}/accept', AcceptOfferController::class)->name('offer.accept');
     });
 
-    Route::controller(MessageController::class)->group(function () {
-        Route::get('/chat', 'index')->name('message.index');
-        Route::get('/messages', 'messages');
-        Route::post('/send', 'send');
-    });
+    Route::controller(ChatController::class)
+        ->prefix('chats')
+        ->name('chats.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::get('/{chat}', 'show')->name('show');
+        });
+
+    Route::controller(MessageController::class)
+        ->prefix('messages')
+        ->name('messages.')
+        ->group(function () {
+            Route::post('/', 'store')->name('store');
+        });
+
+    Route::post('/load/messages', LoadMessagesController::class)
+        ->name('load.messages');
+
+    Route::patch('/update/message/status', UpdateMessageStatusController::class)
+        ->name('update.message.status');
 });
