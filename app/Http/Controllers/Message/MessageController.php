@@ -4,32 +4,29 @@ namespace App\Http\Controllers\Message;
 
 use App\Events\StoreMessageEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Message\MessageFormRequest;
+use App\Http\Requests\Message\StoreRequest;
+use App\Http\Resources\Message\MessageResource;
+use App\Jobs\StoreMessageStatusJob;
 use App\Models\Message;
-use App\Models\User;
 
 class MessageController extends Controller
 {
-    public function index(): \Inertia\Response|\Inertia\ResponseFactory
+    public function store(StoreRequest $request): \Illuminate\Http\JsonResponse|array
     {
-        $bidders = User::query()->whereHas('offers')->get();
+        $validatedData = $request->validated();
+        $chatId = $validatedData['chat_id'];
 
-        $buyers = User::query()->listings()->get();
+        $message = Message::query()->create([
+            'chat_id' => $chatId,
+            'user_id' => $request->user()->id,
+            'text' => $validatedData['text'],
+        ]);
 
-        return inertia('Chat/Index');
-    }
+        StoreMessageStatusJob::dispatch($validatedData, $chatId, $message)
+            ->onQueue('store_message_status');
 
-    public function messages(): \Illuminate\Database\Eloquent\Collection|array
-    {
-        return Message::with('user')->get();
-    }
+        broadcast(new StoreMessageEvent($message))->toOthers();
 
-    public function send(MessageFormRequest $request): Message
-    {
-        $message = $request->user()->messages()->create($request->validated());
-
-        broadcast(new StoreMessageEvent($request->user_id, $request->listing_id, $message));
-
-        return $message;
+        return MessageResource::make($message)->resolve();
     }
 }
