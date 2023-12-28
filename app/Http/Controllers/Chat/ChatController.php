@@ -11,6 +11,7 @@ use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
@@ -35,27 +36,29 @@ class ChatController extends Controller
 
     public function store(StoreRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $user_ids = array_merge($request->validated()['users'], (array)auth()->id());
+        $user_ids = [(int)$request->validated()['user'], auth()->id()];
 
         try {
             DB::beginTransaction();
 
             $chat = Chat::query()->updateOrCreate([
                 'users' => $this->getUserIdsAsString($user_ids),
-            ], [
-                'title' => $request->validated()['title'] ?? null,
+                'listing_id' => (int)$request->validated()['listing_id'],
             ]);
 
             $chat->users()->sync($user_ids);
 
             DB::commit();
+
         } catch (\Exception $exception) {
             DB::rollBack();
+
+            Log::error($exception);
 
             return back()->with('error', $exception->getMessage());
         }
 
-        return redirect()->route('chats.show', $chat->id);
+        return redirect()->back()->with('success', 'Chat created successfully');
     }
 
     public function show(Chat $chat): \Inertia\Response|\Inertia\ResponseFactory

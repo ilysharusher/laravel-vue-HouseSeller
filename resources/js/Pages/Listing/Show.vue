@@ -58,7 +58,7 @@ const user = usePage().props.auth.user;
                         <ListingAdress :listing="listing" class="text-gray-500" />
                     </div>
                     <div>
-                        <WriteToSellerButton :listing="listing"/>
+                        <WriteToSellerButton :listing="listing" />
                     </div>
                 </div>
             </Box>

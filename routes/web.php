@@ -44,8 +44,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->prefix('chats')
         ->name('chats.')
         ->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::post('/', 'store')->name('store');
+            Route::get('/chats', 'index')->name('index');
+            Route::post('/chat', 'store')->name('store');
             Route::get('/{chat}', 'show')->name('show');
         });
 

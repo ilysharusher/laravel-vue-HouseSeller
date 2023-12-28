@@ -11,6 +11,7 @@ class Chat extends Model
 
     protected $fillable = [
         'users',
+        'listing_id',
     ];
 
     public function users(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

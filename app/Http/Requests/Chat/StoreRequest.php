@@ -22,9 +22,8 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['nullable', 'string', 'max:255'],
-            'users' => ['required', 'array'],
-            'users.*' => ['required', 'integer', 'exists:users,id'],
+            'user' => ['required', 'integer', 'exists:users,id'],
+            'listing_id' => ['required', 'integer', 'exists:listings,id'],
         ];
     }
 }

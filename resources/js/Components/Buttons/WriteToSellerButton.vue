@@ -1,22 +1,29 @@
 <script setup>
 
-import {Link} from '@inertiajs/vue3';
+import {router} from '@inertiajs/vue3';
 
-defineProps({
+const props = defineProps({
     listing: {
         type: Object,
         required: true,
     },
 });
+
+const store = (id) => {
+    router.post(window.route('chats.store', {
+        user: id,
+        listing_id: props.listing.id,
+    }));
+};
 </script>
 
 <template>
-    <Link
-        as="button"
+    <button
         class="btn-secondary w-full h-full"
+        @click="store(listing.user_id)"
     >
         Write to seller
-    </Link>
+    </button>
 </template>
 
 <style scoped>
