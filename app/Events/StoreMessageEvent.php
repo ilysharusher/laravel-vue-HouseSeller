@@ -9,14 +9,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class MessageSent implements ShouldBroadcast
+class StoreMessageEvent implements ShouldBroadcast
 {
     use Dispatchable;
     use InteractsWithSockets;
     use SerializesModels;
 
     public function __construct(
-        private readonly User $user,
         private readonly Listing $listing,
         private readonly Message $message
     ) {
@@ -26,13 +25,13 @@ class MessageSent implements ShouldBroadcast
     public function broadcastOn(): array
     {
         return [
-            new PrivateChannel('chats' . $this->listing->id),
+            new PrivateChannel('store-message-event-' . $this->message->chat_id . '-chat'),
         ];
     }
 
     public function broadcastAs(): string
     {
-        return 'message.sent';
+        return 'store-message-event';
     }
 
     public function broadcastWith(): array
@@ -41,10 +40,6 @@ class MessageSent implements ShouldBroadcast
             'message' => $this->message->message,
             'listing' => [
                 'id' => $this->listing->id,
-            ],
-            'user' => [
-                'id' => $this->user->id,
-                'name' => $this->user->name,
             ],
         ];
     }

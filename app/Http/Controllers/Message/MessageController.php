@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Message;
 
-use App\Events\MessageSent;
+use App\Events\StoreMessageEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Message\MessageFormRequest;
 use App\Models\Message;
@@ -28,7 +28,7 @@ class MessageController extends Controller
     {
         $message = $request->user()->messages()->create($request->validated());
 
-        broadcast(new MessageSent($request->user_id, $request->listing_id, $message));
+        broadcast(new StoreMessageEvent($request->user_id, $request->listing_id, $message));
 
         return $message;
     }
