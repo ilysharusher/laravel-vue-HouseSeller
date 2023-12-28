@@ -19,9 +19,9 @@ const monthlyPayment = computed(() => monthlyPaymentResult.value.monthlyPayment)
 const totalPaid = computed(() => monthlyPaymentResult.value.totalPaid);
 const totalInterest = computed(() => monthlyPaymentResult.value.totalInterest);
 
-watch(() => props.offer, (newValue) =>
-    monthlyPaymentResult.value = useMonthlyPayment(newValue, interestRate.value, duration.value),
-);
+watch([() => props.offer, interestRate, duration], () => {
+    monthlyPaymentResult.value = useMonthlyPayment(props.offer, interestRate.value, duration.value);
+});
 </script>
 
 <template>

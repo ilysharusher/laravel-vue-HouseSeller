@@ -3,7 +3,6 @@
 namespace App\Events;
 
 use App\Http\Resources\Message\MessageResource;
-use App\Models\{Listing, Message, User};
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;

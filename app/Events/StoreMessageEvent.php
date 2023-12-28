@@ -16,7 +16,6 @@ class StoreMessageEvent implements ShouldBroadcast
     use SerializesModels;
 
     public function __construct(
-        private readonly Listing $listing,
         private readonly Message $message
     ) {
         //
@@ -37,10 +36,7 @@ class StoreMessageEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'message' => $this->message->message,
-            'listing' => [
-                'id' => $this->listing->id,
-            ],
+            'message' => $this->message->message
         ];
     }
 }
