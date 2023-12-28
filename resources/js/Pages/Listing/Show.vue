@@ -11,6 +11,7 @@ import OfferMade from '@/Components/Listing/Show/OfferMade.vue';
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 import UnsuccessAlert from '@/Components/Alerts/UnsuccessAlert.vue';
 import InfoAlert from '@/Components/Alerts/InfoAlert.vue';
+import WriteToSellerButton from '@/Components/Buttons/WriteToSellerButton.vue';
 
 const props = defineProps({
     listing: {
@@ -50,9 +51,16 @@ const user = usePage().props.auth.user;
                 <template #title>
                     About this listing
                 </template>
-                <ListingPrice :price="listing.price" class="text-2xl font-bold" />
-                <ListingSpace :listing="listing" class="text-lg" />
-                <ListingAdress :listing="listing" class="text-gray-500" />
+                <div class="flex justify-between mt-3">
+                    <div>
+                        <ListingPrice :price="listing.price" class="text-2xl font-bold" />
+                        <ListingSpace :listing="listing" class="text-lg" />
+                        <ListingAdress :listing="listing" class="text-gray-500" />
+                    </div>
+                    <div>
+                        <WriteToSellerButton :listing="listing"/>
+                    </div>
+                </div>
             </Box>
             <InfoAlert v-if="user?.id === listing.user_id" flash-info="This is your listing. You can see more detailed statistics in your personal cabinet." />
             <Box>
@@ -60,6 +68,7 @@ const user = usePage().props.auth.user;
                     Monthly payment
                 </template>
                 <ListingPayment
+                    class="mt-3"
                     :class="{
                         'opacity-25 pointer-events-none': !user || listing.user_id === user.id,
                     }" :offer="offer"

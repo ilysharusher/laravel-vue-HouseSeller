@@ -34,7 +34,7 @@ const max = computed(() => Math.round(props.price * 2));
 
 <template>
     <div>
-        <div class="mt-3">
+        <div class="mt-5">
             <form
                 @submit.prevent="submit"
             >
