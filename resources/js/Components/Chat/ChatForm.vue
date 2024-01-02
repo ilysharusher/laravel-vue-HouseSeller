@@ -4,16 +4,12 @@ import {ref} from 'vue';
 
 const emits = defineEmits(['store']);
 
-const props = defineProps({
-    text: {
-        type: String,
-    },
-});
-
-const text = ref(props.text);
+const text = ref('');
 
 const store = () => {
-    emits.store(props.text);
+    emits('store', text.value);
+
+    text.value = '';
 };
 </script>
 

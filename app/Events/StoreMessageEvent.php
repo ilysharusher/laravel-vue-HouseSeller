@@ -36,7 +36,7 @@ class StoreMessageEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'message' => $this->message->message
+            'message' => $this->message
         ];
     }
 }

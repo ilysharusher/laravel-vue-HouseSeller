@@ -51,13 +51,13 @@ const form = useForm({
     text: '',
 });
 
-const store = () => {
+const store = (text) => {
+    form.text = text;
+
     window.axios.post(window.route('messages.store'), form)
         .then((result) => {
             messages.value.push(result.data);
         });
-
-    form.text = '';
 };
 
 const loadMoreMessages = () => {
@@ -85,7 +85,7 @@ const loadMoreMessages = () => {
                     >
                         <div class="flex flex-col h-full overflow-x-auto mb-4">
                             <div class="flex flex-col h-full">
-                                <ChatMessages />
+                                <ChatMessages v-if="messages.length" :messages="messages" />
                             </div>
                         </div>
                         <ChatForm @store="store" />
