@@ -4,19 +4,10 @@ import UserMessage from '@/Components/Chat/Message/UserMessage.vue';
 import InterlocutorMessage from '@/Components/Chat/Message/InterlocutorMessage.vue';
 
 const userID = usePage().props.auth.user.id;
-
-window.Echo.private(`chat.${userID}`)
-    .listen('.message.sent', (e) => {
-        /*messages.value.push({
-            message: e.message,
-            user_id: e.user.id,
-        });*/
-        console.log(e);
-    });
 </script>
 
 <template>
-    <div
+<!--    <div
         v-for="(message, key) in messages"
         :key="key"
         class="grid grid-cols-12 gap-y-2"
@@ -30,7 +21,7 @@ window.Echo.private(`chat.${userID}`)
             v-else
             :message="message.message"
         />
-    </div>
+    </div>-->
 </template>
 
 <style scoped>

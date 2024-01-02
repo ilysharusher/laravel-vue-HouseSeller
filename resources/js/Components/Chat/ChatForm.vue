@@ -1,18 +1,19 @@
 <script setup>
-import {reactive} from 'vue';
 
-const emits = defineEmits({
-    'sendMessage': Object,
+import {ref} from 'vue';
+
+const emits = defineEmits(['store']);
+
+const props = defineProps({
+    text: {
+        type: String,
+    },
 });
 
-const form = reactive({
-    message: '',
-});
+const text = ref(props.text);
 
-const sendMessage = () => {
-    emits('sendMessage', form);
-
-    form.message = '';
+const store = () => {
+    emits.store(props.text);
 };
 </script>
 
@@ -43,11 +44,11 @@ const sendMessage = () => {
         <div class="flex-grow ml-4">
             <div class="relative w-full">
                 <input
-                    v-model="form.message"
+                    v-model="text"
                     placeholder="Your Message..."
                     type="text"
                     class="flex w-full border rounded-2xl focus:outline-none focus:border-indigo-300 pl-4 h-10 dark:bg-gray-700"
-                    @keydown.enter="sendMessage"
+                    @keydown.enter="store"
                 />
                 <button
                     class="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"
@@ -72,7 +73,7 @@ const sendMessage = () => {
         <div class="ml-4">
             <button
                 class="flex items-center justify-center bg-indigo-500 dark:bg-indigo-600 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0"
-                @click="sendMessage"
+                @click="store"
             >
                 <span>Send</span>
                 <span class="ml-2">

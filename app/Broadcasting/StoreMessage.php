@@ -14,6 +14,8 @@ class StoreMessage
 
     public function join(User $user, Chat $chat): bool
     {
-        return auth()->check() && $chat->users->contains($user);
+        return auth()->check() &&
+            auth()->id() === $user->id &&
+            $chat->users()->where('users.id', $user->id)->exists();
     }
 }

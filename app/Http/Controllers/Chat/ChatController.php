@@ -58,7 +58,7 @@ class ChatController extends Controller
             return back()->with('error', $exception->getMessage());
         }
 
-        return redirect()->back()->with('success', 'Chat created successfully');
+        return redirect()->route('chats.show', $chat->id);
     }
 
     public function show(Chat $chat): \Inertia\Response|\Inertia\ResponseFactory

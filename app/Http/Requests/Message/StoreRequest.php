@@ -23,8 +23,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'chat_id' => ['required', 'integer', 'exists:chats,id'],
-            'interlocutors' => ['required', 'array'],
-            'interlocutors.*' => ['required', 'integer', 'exists:users,id'],
+            'interlocutor' => ['required', 'integer', 'exists:users,id'],
             'text' => ['required', 'string', 'max:255'],
         ];
     }

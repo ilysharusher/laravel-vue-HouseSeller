@@ -1,9 +1,14 @@
 <script setup>
 
+defineProps({
+    interlocutor: {
+        type: Object,
+    },
+});
 </script>
 
 <template>
-    <div class="flex flex-col py-8 pl-6 pr-2 w-64 bg-white dark:bg-gray-800 flex-shrink-0">
+    <div class="flex flex-col py-8 pl-6 pr-2 w-1/3 bg-white dark:bg-gray-800 flex-shrink-0">
         <div class="flex flex-row items-center h-12 w-full">
             <div
                 class="flex items-center justify-center rounded-xl text-indigo-700 bg-indigo-100 h-10 w-10"
@@ -24,10 +29,10 @@
                 </svg>
             </div>
             <div>
-                <div class="ml-2 font-bold text-2xl">Chat</div>
+                <div class="ml-2 font-bold text-2xl">Chat <span class="text-indigo-600">with </span><span>{{ interlocutor.name }}</span></div>
             </div>
         </div>
-        <div class="flex flex-col mt-8">
+        <!--        <div class="flex flex-col mt-8">
             <div class="flex flex-row items-center justify-between text-xs">
                 <span class="font-bold">Unread Chats</span>
                 <span
@@ -109,7 +114,7 @@
                     <div class="ml-2 text-sm font-semibold">Henry Boyd</div>
                 </button>
             </div>
-        </div>
+        </div>-->
     </div>
 </template>
 

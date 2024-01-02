@@ -18,7 +18,7 @@ class ChatResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title ?? 'Chat with ' . UserResource::make($this->chatWith)->resolve()['name'],
+            'title' => 'Chat with ' . UserResource::make($this->chatWith)->resolve()['name'],
             'users' => $this->users,
             'last_message' => isset($this->lastMessage) ? MessageResource::make($this->lastMessage)->resolve() : null,
             'unread_message_statuses_count' => $this->unread_message_statuses_count,
