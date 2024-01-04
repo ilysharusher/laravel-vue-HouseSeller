@@ -70,8 +70,6 @@ const loadMoreMessages = () => {
 </script>
 
 <template>
-    <Head title="Chat" />
-
     <div
         class="h-screen overflow-hidden flex rounded-2xl bg-gray-200 dark:bg-gray-800"
         style="height: calc(100vh - 160px);"

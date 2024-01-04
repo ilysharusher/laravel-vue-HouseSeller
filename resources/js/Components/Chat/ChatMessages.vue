@@ -21,12 +21,11 @@ const userID = usePage().props.auth.user.id;
     >
         <UserMessage
             v-if="message.is_owner"
-            :message="message.text"
-            :seen="false"
+            :message="message"
         />
         <InterlocutorMessage
             v-else
-            :message="message.text"
+            :message="message"
         />
     </div>
 </template>

@@ -15,6 +15,11 @@ class Message extends Model
         'text',
     ];
 
+    public function messageStatus(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(MessageStatus::class, 'id', 'message_id');
+    }
+
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class);
@@ -27,6 +32,11 @@ class Message extends Model
 
     public function getIsOwnerAttribute(): bool
     {
-        return (int) $this->user_id === (int) auth()->id();
+        return (int)$this->user_id === (int)auth()->id();
+    }
+
+    public function getIsReadAttribute(): bool
+    {
+        return $this->messageStatus()->exists() && $this->messageStatus->is_read;
     }
 }

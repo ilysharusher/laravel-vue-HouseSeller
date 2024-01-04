@@ -16,13 +16,13 @@ defineProps({
             method="delete"
             as="button"
             class="btn-secondary"
-            :class="{'opacity-25 pointer-events-none': chats.data.length === 0}"
+            :class="{'opacity-25 pointer-events-none': chats.length === 0}"
         >
             Delete All Chats
         </Link>
     </div>
 
-    <section v-if="chats.data.length">
+    <section v-if="chats">
         <div
             v-for="(chat, id) in chats.data"
             :key="id"
@@ -36,7 +36,7 @@ defineProps({
 
     <EmptyPlace v-else>It's empty for now.</EmptyPlace>
 
-    <Pagination v-if="chats.last_page !== 1" :links="chats.links" />
+<!--    <Pagination v-if="chats.last_page !== 1" :links="chats.links" />-->
 </template>
 
 <style scoped>

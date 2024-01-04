@@ -19,6 +19,7 @@ class MessageResource extends JsonResource
             'chat_id' => $this->chat_id,
             'user_name' => $this->user->name,
             'text' => $this->text,
+            'is_read' => $this->is_read,
             'is_owner' => $this->is_owner,
             'time' => $this->time,
         ];

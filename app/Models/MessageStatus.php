@@ -22,4 +22,9 @@ class MessageStatus extends Model
     {
         return $this->belongsTo(Chat::class);
     }
+
+    public function message(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Message::class);
+    }
 }

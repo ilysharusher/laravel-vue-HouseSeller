@@ -1,7 +1,7 @@
 <script setup>
+
 defineProps({
-    message: String,
-    seen: Boolean,
+    message: Object,
 });
 </script>
 
@@ -16,19 +16,26 @@ defineProps({
             <div
                 class="relative mr-3 text-sm bg-indigo-100 dark:bg-gray-800 py-2 px-4 shadow rounded-xl"
             >
-                <div>
-                    {{ message }}
-                </div>
-                <div
-                    v-if="seen"
-                    class="absolute text-xs bottom-0 right-0 -mb-5 mr-2 text-gray-500"
-                >
-                    Seen
+                <div class="flex flex-col items-end">
+                    <div class="flex-grow">
+                        {{ message.text }}
+                    </div>
+                    <div
+                        class="text-xs text-gray-500 mt-1"
+                    >
+                        {{ message.time }} - <span
+                            :class="message.is_read ? 'text-green-500': 'text-yellow-500'"
+                        >{{ message.is_read ? 'read' : 'sent' }}</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+
+</style>
 
 <style scoped>
 
