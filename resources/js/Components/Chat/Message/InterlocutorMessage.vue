@@ -15,8 +15,15 @@ defineProps({
             <div
                 class="relative ml-3 text-sm bg-white dark:bg-gray-700 py-2 px-4 shadow rounded-xl"
             >
-                <div>
-                    {{ message }}
+                <div class="flex flex-col items-start">
+                    <div class="flex-grow">
+                        {{ message.text }}
+                    </div>
+                    <div
+                        class="text-xs text-gray-500 mt-1"
+                    >
+                        {{ message.time }}
+                    </div>
                 </div>
             </div>
         </div>

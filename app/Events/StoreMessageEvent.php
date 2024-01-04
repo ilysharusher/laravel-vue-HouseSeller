@@ -2,7 +2,8 @@
 
 namespace App\Events;
 
-use App\Models\{Listing, Message, User};
+use App\Http\Resources\Message\MessageResource;
+use App\Models\Message;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
@@ -18,7 +19,6 @@ class StoreMessageEvent implements ShouldBroadcast
     public function __construct(
         private readonly Message $message
     ) {
-        //
     }
 
     public function broadcastOn(): array
@@ -36,7 +36,7 @@ class StoreMessageEvent implements ShouldBroadcast
     public function broadcastWith(): array
     {
         return [
-            'message' => $this->message
+            'message' => MessageResource::make($this->message)->resolve(),
         ];
     }
 }

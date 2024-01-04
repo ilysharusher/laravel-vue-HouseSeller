@@ -1,5 +1,4 @@
 <script setup>
-import {usePage} from '@inertiajs/vue3';
 import UserMessage from '@/Components/Chat/Message/UserMessage.vue';
 import InterlocutorMessage from '@/Components/Chat/Message/InterlocutorMessage.vue';
 
@@ -9,8 +8,6 @@ defineProps({
         default: () => [],
     },
 });
-
-const userID = usePage().props.auth.user.id;
 </script>
 
 <template>
