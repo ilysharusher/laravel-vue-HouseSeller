@@ -5,6 +5,7 @@ import ChatForm from '@/Components/Chat/ChatForm.vue';
 import {onBeforeMount, ref} from 'vue';
 import {Head, useForm, usePage} from '@inertiajs/vue3';
 import LeftSide from '@/Components/Chat/LeftSide.vue';
+import Pagination from '@/Components/Chat/Pagination.vue';
 
 const props = defineProps({
     chat: {
@@ -82,6 +83,7 @@ const loadMoreMessages = () => {
                         class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 dark:bg-gray-900 h-full p-4"
                     >
                         <div class="flex flex-col h-full overflow-x-auto mb-4">
+                            <Pagination v-if="!isLastPage" @load-more-messages="loadMoreMessages" />
                             <div class="flex flex-col h-full">
                                 <ChatMessages v-if="messages.length" :messages="messages" />
                             </div>
