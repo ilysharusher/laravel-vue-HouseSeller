@@ -1,10 +1,27 @@
 <script setup>
 
-import {ref} from 'vue';
+import {nextTick, onMounted, ref} from 'vue';
 
 const emits = defineEmits(['store']);
 
 const text = ref('');
+
+const resizeTextarea = (event) => {
+    if (event.target.value === '') {
+        event.target.style.height = '40px';
+    } else {
+        event.target.style.height = 'auto';
+        event.target.style.height = event.target.scrollHeight + 'px';
+    }
+};
+
+onMounted(() => {
+    nextTick(() => {
+        const textarea = document.getElementById('autoresizing');
+        textarea.style.height = textarea.scrollHeight + 'px';
+        textarea.addEventListener('input', resizeTextarea);
+    });
+});
 
 const store = () => {
     emits('store', text.value);
@@ -39,11 +56,12 @@ const store = () => {
         </div>
         <div class="flex-grow ml-4">
             <div class="relative w-full">
-                <input
+                <textarea
+                    id="autoresizing"
                     v-model="text"
                     placeholder="Your Message..."
                     type="text"
-                    class="flex w-full border rounded-2xl focus:outline-none focus:border-indigo-300 pl-4 h-10 dark:bg-gray-700"
+                    class="flex w-full border rounded-2xl focus:outline-none focus:border-indigo-300 pl-4 pr-12 h-11 dark:bg-gray-700 resize-none"
                     @keydown.enter="store"
                 />
                 <button
@@ -94,5 +112,12 @@ const store = () => {
 </template>
 
 <style scoped>
+textarea::-webkit-scrollbar {
+    display: none;
+}
 
+textarea {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
 </style>
