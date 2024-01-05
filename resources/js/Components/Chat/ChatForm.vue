@@ -7,11 +7,13 @@ const emits = defineEmits(['store']);
 const text = ref('');
 
 const resizeTextarea = (event) => {
-    if (event.target.value === '') {
-        event.target.style.height = '40px';
+    const textarea = event.target;
+    textarea.style.height = 'auto';
+
+    if (textarea.scrollHeight > textarea.clientHeight) {
+        textarea.style.height = textarea.scrollHeight + 'px';
     } else {
-        event.target.style.height = 'auto';
-        event.target.style.height = event.target.scrollHeight + 'px';
+        textarea.style.height = '44px';
     }
 };
 
