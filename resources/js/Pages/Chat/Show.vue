@@ -1,11 +1,11 @@
 <script setup>
 
-import ChatMessages from '@/Components/Chat/ChatMessages.vue';
-import ChatForm from '@/Components/Chat/ChatForm.vue';
+import ChatMessages from '@/Components/Chat/Show/ChatMessages.vue';
+import ChatForm from '@/Components/Chat/Show/ChatForm.vue';
 import {onBeforeMount, ref} from 'vue';
-import {Head, useForm, usePage} from '@inertiajs/vue3';
-import LeftSide from '@/Components/Chat/LeftSide.vue';
-import Pagination from '@/Components/Chat/Pagination.vue';
+import {useForm, usePage} from '@inertiajs/vue3';
+import LeftSide from '@/Components/Chat/Show/LeftSide.vue';
+import Pagination from '@/Components/Chat/Show/Pagination.vue';
 
 const props = defineProps({
     chat: {

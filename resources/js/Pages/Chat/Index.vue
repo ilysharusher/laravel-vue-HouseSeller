@@ -1,10 +1,26 @@
 <script setup>
-import {Link} from '@inertiajs/vue3';
-import Pagination from '@/Components/UI/Pagination.vue';
+import {Link, usePage} from '@inertiajs/vue3';
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
+import {onBeforeMount} from 'vue';
+import ChatField from '@/Components/Chat/Index/ChatField.vue';
 
-defineProps({
-    chats: Object,
+const props = defineProps({
+    chats: {
+        type: Array,
+        default: () => [],
+    },
+});
+
+onBeforeMount(() => {
+    window.Echo.private(`store-message-status-event-${usePage().props.auth.user.id}-user`)
+        .listen('.store-message-status-event', (e) => {
+            props.chats.forEach(chat => {
+                if (chat.id === e.chat_id) {
+                    chat.unread_message_statuses_count = e.count;
+                    chat.last_message = e.message;
+                }
+            });
+        });
 });
 </script>
 
@@ -24,19 +40,16 @@ defineProps({
 
     <section v-if="chats">
         <div
-            v-for="(chat, id) in chats.data"
+            v-for="(chat, id) in chats"
             :key="id"
         >
-            <!--            <NewOfferNotification
-                v-if="notification.type === 'App\\Notifications\\OfferMade'"
-                :notification="notification"
-            />-->
+            <ChatField
+                :chat="chat"
+            />
         </div>
     </section>
 
     <EmptyPlace v-else>It's empty for now.</EmptyPlace>
-
-<!--    <Pagination v-if="chats.last_page !== 1" :links="chats.links" />-->
 </template>
 
 <style scoped>

@@ -24,12 +24,9 @@ class ChatController extends Controller
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
     {
-        $users = User::query()->anotherUsers()->get();
-
         $chats = auth()->user()->getIndexChats();
 
         return inertia('Chat/Index', [
-            'users' => UserResource::collection($users)->resolve(),
             'chats' => ChatResource::collection($chats)->resolve(),
         ]);
     }
