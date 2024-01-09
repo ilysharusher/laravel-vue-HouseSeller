@@ -38,8 +38,17 @@ onBeforeMount(() => {
             if (window.location.href === window.route('chats.show', {chat: props.chat.id})) {
                 window.axios.patch(window.route('update.message.status'), {
                     user_id: userId,
+                    chat_id: props.chat.id,
                     message_id: e.message.id,
                 });
+            }
+        });
+
+    window.Echo.private(`message-read-event-${props.chat.id}-chat`)
+        .listen('.message-read-event', (e) => {
+            const message = messages.value.find(message => message.id === e.message_id);
+            if (message) {
+                message.is_read = true;
             }
         });
 });
@@ -76,9 +85,9 @@ const loadMoreMessages = () => {
         style="height: calc(100vh - 160px);"
     >
         <div class="flex h-screen antialiased text-gray-800 dark:text-white" style="height: calc(100vh - 160px);">
-            <div class="flex flex-row h-full w-full overflow-x-hidden">
+            <div class="flex flex-col md:flex-row h-full w-full overflow-x-hidden mx-auto">
                 <LeftSide :interlocutor="interlocutor" />
-                <div class="flex flex-col flex-auto h-full p-6 w-2/3">
+                <div class="flex flex-col flex-auto h-full p-6 md:w-2/3">
                     <div
                         class="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 dark:bg-gray-900 h-full p-4"
                     >

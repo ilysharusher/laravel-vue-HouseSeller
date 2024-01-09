@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Message;
+namespace App\Http\Controllers\Chat\Message;
 
 use App\Events\StoreMessageEvent;
 use App\Http\Controllers\Controller;

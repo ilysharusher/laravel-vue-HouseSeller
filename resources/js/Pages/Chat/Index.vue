@@ -16,7 +16,7 @@ onBeforeMount(() => {
         .listen('.store-message-status-event', (e) => {
             props.chats.forEach(chat => {
                 if (chat.id === e.chat_id) {
-                    chat.unread_message_statuses_count = e.count;
+                    chat.unread_messages_count = e.count;
                     chat.last_message = e.message;
                 }
             });

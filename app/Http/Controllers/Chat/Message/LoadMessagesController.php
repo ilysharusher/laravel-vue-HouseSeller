@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Message;
+namespace App\Http\Controllers\Chat\Message;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Message\LoadMessageRequest;

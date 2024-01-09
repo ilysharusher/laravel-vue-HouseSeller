@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Events\MessageReadEvent;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,7 +25,7 @@ class Chat extends Model
         return $this->hasMany(Message::class);
     }
 
-    public function unreadMessageStatuses(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function unreadMessages(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(MessageStatus::class)
             ->where('user_id', auth()->id())
@@ -60,9 +61,21 @@ class Chat extends Model
 
     public function readMessages(): void
     {
-        $this->unreadMessageStatuses()
-            ->update([
-                'is_read' => true,
+        $unreadMessages = $this->unreadMessages()
+            ->with('chat')
+            ->get();
+
+        $unreadMessages->each(function ($unreadMessage) {
+            $unreadMessage->update([
+                'is_read' => true
             ]);
+
+            broadcast(
+                new MessageReadEvent(
+                    $unreadMessage->chat->id,
+                    $unreadMessage->message_id,
+                )
+            )->toOthers();
+        });
     }
 }

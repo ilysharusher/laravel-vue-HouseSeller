@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
         return $this->chats()
             ->has('messages')
             ->with(['lastMessage', 'chatWith'])
-            ->withCount('unreadMessageStatuses')
+            ->withCount('unreadMessages')
             ->get();
     }
 

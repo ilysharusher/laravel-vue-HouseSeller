@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col py-8 pl-6 pr-2 w-1/3 bg-white dark:bg-gray-800 flex-shrink-0">
+    <div class="flex flex-col md:py-8 pt-5 pl-6 pr-2 md:w-1/3 bg-white dark:bg-gray-800 flex-shrink-0">
         <div class="flex flex-row items-center h-12 w-full">
             <div
                 class="flex items-center justify-center rounded-xl text-indigo-700 bg-indigo-100 h-10 w-10"

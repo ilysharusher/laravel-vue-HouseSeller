@@ -23,6 +23,7 @@ class UpdateMessageStatusRequest extends FormRequest
     {
         return [
             'user_id' => ['required', 'integer', 'exists:users,id'],
+            'chat_id' => ['required', 'integer', 'exists:chats,id'],
             'message_id' => ['required', 'integer', 'exists:messages,id'],
         ];
     }

@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Chat\ChatController;
-use App\Http\Controllers\Message\LoadMessagesController;
-use App\Http\Controllers\Message\MessageController;
-use App\Http\Controllers\MessageStatus\UpdateMessageStatusController;
+use App\Http\Controllers\Chat\Message\LoadMessagesController;
+use App\Http\Controllers\Chat\Message\MessageController;
+use App\Http\Controllers\Chat\Message\UpdateMessageStatusController;
 use App\Http\Controllers\Listing\{ListingController, ListingImageController, ListingOfferController};
 use App\Http\Controllers\Notification\{DeleteAllNotifications, MarkNotificationAsRead, NotificationController};
 use App\Http\Controllers\Offer\AcceptOfferController;

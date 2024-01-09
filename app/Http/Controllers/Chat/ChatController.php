@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Chat;
 
+use App\Http\Controllers\Chat\Message\LoadMessagesController;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Message\LoadMessagesController;
 use App\Http\Requests\Chat\StoreRequest;
 use App\Http\Resources\Chat\ChatResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\Chat;
-use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
