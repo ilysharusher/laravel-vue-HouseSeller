@@ -61,4 +61,12 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     {
         return $query->where('id', '!=', auth()->id());
     }
+
+    public function getUnreadMessagesCountAttribute(): int
+    {
+        return $this->chats()
+            ->withCount('unreadMessages')
+            ->get()
+            ->sum('unread_messages_count');
+    }
 }

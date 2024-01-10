@@ -1,5 +1,5 @@
 <script setup>
-import {Link, usePage} from '@inertiajs/vue3';
+import {usePage} from '@inertiajs/vue3';
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 import {onBeforeMount} from 'vue';
 import ChatField from '@/Components/Chat/Index/ChatField.vue';

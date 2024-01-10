@@ -41,7 +41,13 @@ class HandleInertiaRequests extends Middleware
             ],
             'auth' => fn () => [
                 'user' => $request->user()
-                    ? $request->user()->only('id', 'name', 'email', 'unreadNotifications')
+                    ? $request->user()->only(
+                        'id',
+                        'name',
+                        'email',
+                        'unreadNotifications',
+                        'unread_messages_count'
+                    )
                     : null,
             ],
         ]);
