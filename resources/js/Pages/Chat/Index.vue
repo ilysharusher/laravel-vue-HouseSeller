@@ -27,7 +27,7 @@ onBeforeMount(() => {
 <template>
     <div class="flex justify-between">
         <h1 class="text-3xl mb-4">Your Chats</h1>
-        <Link
+        <!--        <Link
             :href="route('notification.destroy_all')"
             method="delete"
             as="button"
@@ -35,7 +35,7 @@ onBeforeMount(() => {
             :class="{'opacity-25 pointer-events-none': chats.length === 0}"
         >
             Delete All Chats
-        </Link>
+        </Link>-->
     </div>
 
     <section v-if="chats">

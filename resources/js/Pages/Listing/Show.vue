@@ -57,7 +57,7 @@ const user = usePage().props.auth.user;
                         <ListingSpace :listing="listing" class="text-lg" />
                         <ListingAdress :listing="listing" class="text-gray-500" />
                     </div>
-                    <div>
+                    <div v-if="props.listing.user_id !== user.id">
                         <WriteToSellerButton :listing="listing" />
                     </div>
                 </div>
