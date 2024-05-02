@@ -27,7 +27,6 @@ const flashInfo = computed(
         <InfoAlert v-if="flashInfo" :flash-info="flashInfo" />
         <slot />
     </main>
-<!--    <Footer /> // it looks like so bad  -->
 </template>
 
 <style scoped></style>

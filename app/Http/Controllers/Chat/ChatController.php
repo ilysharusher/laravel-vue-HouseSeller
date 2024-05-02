@@ -45,7 +45,6 @@ class ChatController extends Controller
             $chat->users()->sync($user_ids);
 
             DB::commit();
-
         } catch (\Exception $exception) {
             DB::rollBack();
 

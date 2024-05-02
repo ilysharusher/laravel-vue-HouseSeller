@@ -9,7 +9,7 @@ use App\Models\Chat;
 
 class LoadMessagesController extends Controller
 {
-    public function __invoke(LoadMessageRequest $request, Chat $chat = null): \Illuminate\Http\JsonResponse
+    public function __invoke(LoadMessageRequest $request, ?Chat $chat = null): \Illuminate\Http\JsonResponse
     {
         $requestValidated = $request->validated();
         $chat = $chat ?? Chat::query()->findOrFail($requestValidated['chat_id']);
