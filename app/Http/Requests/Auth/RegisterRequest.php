@@ -4,9 +4,12 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Tests\RequestFactories\RegisterRequestFactory;
 
 class RegisterRequest extends FormRequest
 {
+    public static string $factory = RegisterRequestFactory::class;
+
     public function authorize(): bool
     {
         return true;
