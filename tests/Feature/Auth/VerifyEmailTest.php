@@ -75,7 +75,7 @@ class VerifyEmailTest extends TestCase
         );
 
         $this->get($verificationUrl)
-            ->assertRedirect()
+            ->assertRedirect(route('listing.index'))
             ->assertSessionHas('success');
 
         Event::assertDispatched(Verified::class);
