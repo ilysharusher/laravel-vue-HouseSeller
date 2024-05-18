@@ -20,7 +20,7 @@ class ListingPageTest extends TestCase
         $this->withExceptionHandling();
     }
 
-    public function signIn(): User
+    private function signIn(): User
     {
         $user = User::factory()->create();
         $this->actingAs($user);
@@ -35,12 +35,10 @@ class ListingPageTest extends TestCase
         )
             ->assertOk()
             ->assertInertia(
-                (
-                    fn (Assert $page) => $page
+                fn (Assert $page) => $page
                     ->component('Listing/Index')
                     ->has('filters')
                     ->has('listings')
-                )
             );
     }
 
@@ -55,12 +53,10 @@ class ListingPageTest extends TestCase
         )
             ->assertOk()
             ->assertInertia(
-                (
-                    fn (Assert $page) => $page
+                fn (Assert $page) => $page
                     ->component('Listing/Show')
                     ->has('listing')
                     ->has('offerMade')
-                )
             );
     }
 }

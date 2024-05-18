@@ -10,13 +10,14 @@ class LogoutTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function signIn(): User
+    private function signIn(): User
     {
         $user = User::factory()->create();
         $this->actingAs($user);
 
         return $user;
     }
+
     public function test_user_can_logout()
     {
         $this->withExceptionHandling();

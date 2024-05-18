@@ -26,7 +26,7 @@ class VerifyEmailTest extends TestCase
         $this->withExceptionHandling();
     }
 
-    public function signIn(): User
+    private function signIn(): User
     {
         $user = User::factory()->create();
         $this->actingAs($user);
