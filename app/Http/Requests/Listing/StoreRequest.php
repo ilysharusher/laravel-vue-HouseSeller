@@ -3,12 +3,9 @@
 namespace App\Http\Requests\Listing;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Tests\RequestFactories\StoreListingRequestFactory;
 
 class StoreRequest extends FormRequest
 {
-    public static string $factory = StoreListingRequestFactory::class;
-
     public function authorize(): bool
     {
         return auth()->check();

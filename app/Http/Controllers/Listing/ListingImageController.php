@@ -36,7 +36,7 @@ class ListingImageController extends Controller
     public function store(Listing $listing, StoreListingImageRequest $request): \Illuminate\Http\RedirectResponse
     {
         foreach ($request->file('images') as $image) {
-            $path = $image->store('images');
+            $path = $image->store('images', 'public');
 
             $listing->images()->create([
                 'image' => $path,

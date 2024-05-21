@@ -1,12 +1,12 @@
 <?php
 
-namespace Tests\Feature\Pages;
+namespace Pages\RealtorListing;
 
 use App\Http\Controllers\Realtor\RealtorListingController;
-use App\Http\Requests\Listing\StoreRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Inertia\Testing\AssertableInertia as Assert;
+use Tests\RequestFactories\StoreListingRequestFactory;
 use Tests\TestCase;
 
 class RealtorListingPageTest extends TestCase
@@ -38,7 +38,7 @@ class RealtorListingPageTest extends TestCase
     private function createListing(User $user)
     {
         return $user->listings()->create(
-            StoreRequest::factory()->create()
+            StoreListingRequestFactory::new()->create()
         );
     }
 
@@ -70,7 +70,7 @@ class RealtorListingPageTest extends TestCase
 
     public function test_realtor_store_method_can_store_listing()
     {
-        $data = StoreRequest::factory()->create();
+        $data = StoreListingRequestFactory::new()->create();
 
         $this->post(
             action([RealtorListingController::class, 'store']),
@@ -127,7 +127,7 @@ class RealtorListingPageTest extends TestCase
     {
         $listing = $this->createListing($this->user);
 
-        $data = StoreRequest::factory()->create([
+        $data = StoreListingRequestFactory::new()->create([
             'beds' => 3,
             'baths' => 2,
             'area' => 200

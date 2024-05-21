@@ -1,6 +1,6 @@
 <?php
 
-namespace Pages;
+namespace Pages\Listing;
 
 use App\Http\Controllers\Listing\ListingController;
 use App\Models\Listing;

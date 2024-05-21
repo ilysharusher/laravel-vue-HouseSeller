@@ -3,12 +3,12 @@
 namespace Tests\Feature\Auth;
 
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
+use Tests\RequestFactories\RegisterRequestFactory;
 use Tests\TestCase;
 
 class RegisterTest extends TestCase
@@ -34,7 +34,7 @@ class RegisterTest extends TestCase
     {
         Event::fake();
 
-        $data = RegisterRequest::factory()->create();
+        $data = RegisterRequestFactory::new()->create();
 
         $this->post(
             action([RegisterController::class, 'register_store']),
