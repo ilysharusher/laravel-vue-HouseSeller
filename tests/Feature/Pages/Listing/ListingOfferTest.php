@@ -79,4 +79,56 @@ class ListingOfferTest extends TestCase
             ->assertRedirect()
             ->assertSessionHas('success');
     }
+
+    public function test_guests_cannot_accept_an_offer()
+    {
+        $anotherUser = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $this->actingAs($anotherUser);
+
+        $this->post(
+            action([ListingOfferController::class, 'store'], $this->listing),
+            [
+                'price' => 100,
+            ]
+        );
+
+        $this->assertDatabaseCount('offers', 1);
+
+        Auth::logout();
+        $this->assertGuest();
+
+        $this->patch(
+            route('realtor.offer.accept', $this->listing->offers->first())
+        )
+            ->assertRedirect(route('login'));
+    }
+
+    public function test_authenticated_users_can_accept_an_offer()
+    {
+        $anotherUser = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $this->actingAs($anotherUser);
+
+        $this->post(
+            action([ListingOfferController::class, 'store'], $this->listing),
+            [
+                'price' => 100,
+            ]
+        );
+
+        $this->assertDatabaseCount('offers', 1);
+
+        $this->actingAs($this->user);
+
+        $this->patch(
+            route('realtor.offer.accept', $this->listing->offers->first())
+        )
+            ->assertRedirect()
+            ->assertSessionHas('success');
+    }
 }
