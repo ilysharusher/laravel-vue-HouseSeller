@@ -8,12 +8,18 @@ use App\Http\Requests\Chat\StoreRequest;
 use App\Http\Resources\Chat\ChatResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\Chat;
+use App\Models\User;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Chat::class, 'chat');
+    }
+
     private function getUserIdsAsString(array $user_ids): string
     {
         sort($user_ids);
@@ -30,7 +36,7 @@ class ChatController extends Controller
         ]);
     }
 
-    public function store(StoreRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(User $user, StoreRequest $request): \Illuminate\Http\RedirectResponse
     {
         $user_ids = [(int)$request->validated()['user'], auth()->id()];
 
