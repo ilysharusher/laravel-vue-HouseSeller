@@ -9,6 +9,7 @@ use App\Http\Resources\Chat\ChatResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\Chat;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -74,5 +75,12 @@ class ChatController extends Controller
             'messages' => $messages->messages,
             'isLastPage' => $messages->is_last_page,
         ]);
+    }
+
+    public function destroy_all(Request $request): \Illuminate\Http\RedirectResponse
+    {
+        $request->user()->chats()->delete();
+
+        return back()->with('success', 'All chats have been deleted.');
     }
 }

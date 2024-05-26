@@ -1,5 +1,5 @@
 <script setup>
-import {usePage} from '@inertiajs/vue3';
+import {Link, usePage} from '@inertiajs/vue3';
 import EmptyPlace from '@/Components/UI/EmptyPlace.vue';
 import {onBeforeMount} from 'vue';
 import ChatField from '@/Components/Chat/Index/ChatField.vue';
@@ -27,18 +27,18 @@ onBeforeMount(() => {
 <template>
     <div class="flex justify-between">
         <h1 class="text-3xl mb-4">Your Chats</h1>
-        <!--        <Link
-            :href="route('notification.destroy_all')"
+        <Link
+            :href="route('chats.destroy_all')"
             method="delete"
             as="button"
             class="btn-secondary"
             :class="{'opacity-25 pointer-events-none': chats.length === 0}"
         >
             Delete All Chats
-        </Link>-->
+        </Link>
     </div>
 
-    <section v-if="chats">
+    <section v-if="chats.length">
         <div
             v-for="(chat, id) in chats"
             :key="id"

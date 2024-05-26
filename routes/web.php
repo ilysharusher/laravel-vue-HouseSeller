@@ -45,6 +45,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('/chats', 'index')->name('index');
             Route::post('/chat', 'store')->name('store');
             Route::get('/{chat}', 'show')->name('show');
+            Route::delete('destroy_all', 'destroy_all')->name('destroy_all');
         });
 
     Route::controller(MessageController::class)
