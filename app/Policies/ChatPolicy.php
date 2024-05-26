@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Chat;
 use App\Models\User;
 
 class ChatPolicy
@@ -11,10 +12,10 @@ class ChatPolicy
         return auth()->check();
     }
 
-    /*public function view(User $user, Chat $chat): bool
+    public function view(User $user, Chat $chat): bool
     {
-        //
-    }*/
+        return true;
+    }
 
     public function create(User $user): bool
     {
