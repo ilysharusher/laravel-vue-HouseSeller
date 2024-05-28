@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             'password' => 'password',
             'is_admin' => true,
         ]);
+
         User::factory(10)->has(
             Listing::factory(3)
         )->create();

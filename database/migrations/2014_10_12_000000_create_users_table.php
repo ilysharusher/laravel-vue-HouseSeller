@@ -21,6 +21,8 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('users');
+        }
     }
 };

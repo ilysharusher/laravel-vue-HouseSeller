@@ -30,6 +30,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('chats');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('chats');
+        }
     }
 };

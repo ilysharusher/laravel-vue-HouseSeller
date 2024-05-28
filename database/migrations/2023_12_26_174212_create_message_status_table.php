@@ -36,6 +36,8 @@ return new class () extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('message_status');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('message_status');
+        }
     }
 };

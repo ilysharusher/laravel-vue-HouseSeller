@@ -36,6 +36,8 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('listings');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('listings');
+        }
     }
 };

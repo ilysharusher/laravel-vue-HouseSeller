@@ -20,6 +20,8 @@ return new class () extends Migration {
 
     public function down(): void
     {
-        Schema::dropIfExists('failed_jobs');
+        if (!app()->isProduction()) {
+            Schema::dropIfExists('failed_jobs');
+        }
     }
 };
