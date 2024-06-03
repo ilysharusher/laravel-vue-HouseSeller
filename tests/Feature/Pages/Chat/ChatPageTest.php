@@ -56,7 +56,8 @@ class ChatPageTest extends TestCase
         )
             ->assertOk()
             ->assertInertia(
-                (fn (Assert $assert) => $assert
+                (
+                    fn (Assert $assert) => $assert
                     ->component('Chat/Index')
                     ->has('chats')
                 )

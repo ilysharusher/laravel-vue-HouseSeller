@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\Commands\AddClassCommandAction;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\File;
 
 abstract class AddClassCommand extends Command
 {
@@ -11,54 +11,23 @@ abstract class AddClassCommand extends Command
 
     abstract protected function getClassName(): string;
 
-    protected function getStub(string $subfolder = null): string
-    {
-        $namespace = $this->getNamespace();
-
-        if ($subfolder) {
-            $namespace .= '\\' . str_replace('/', '\\', $subfolder);
-        }
-
-        return <<<EOT
-<?php
-
-namespace {$namespace};
-
-class {{class}}
-{
-    //
-}
-
-EOT;
-    }
-
     public function handle(): void
     {
         $name = $this->argument('name');
-        $path = $this->getNamespace();
         $subfolder = null;
 
         if (preg_match('#[/\\\\]#', $name)) {
             [$subfolder, $name] = preg_split('#[/\\\\]#', $name, 2);
-            $path .= '/' . $subfolder;
-
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, 0755, true);
-            }
         }
 
-        $file = $path . '/' . $name . '.php';
+        $namespace = $this->getNamespace();
+        $className = $name;
 
-        if (File::exists($file)) {
-            $this->error($this->getClassName() . ' already exists.');
-            return;
+        try {
+            (new AddClassCommandAction($namespace, $className, $subfolder))->__invoke();
+            $this->info($this->getClassName() . ' created successfully.');
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
         }
-
-        $stub = $this->getStub($subfolder);
-        $stub = str_replace('{{class}}', $name, $stub);
-
-        File::put($file, $stub);
-
-        $this->info($this->getClassName() . ' created successfully.');
     }
 }
