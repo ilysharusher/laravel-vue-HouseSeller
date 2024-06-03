@@ -10,6 +10,11 @@ class AddServiceCommand extends AddClassCommand
 
     protected function getNamespace(): string
     {
+        return 'App\Services';
+    }
+
+    protected function getClassName(): string
+    {
         return 'Service';
     }
 }

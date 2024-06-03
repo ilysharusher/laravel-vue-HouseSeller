@@ -9,6 +9,8 @@ abstract class AddClassCommand extends Command
 {
     abstract protected function getNamespace(): string;
 
+    abstract protected function getClassName(): string;
+
     protected function getStub(string $subfolder = null): string
     {
         $namespace = $this->getNamespace();
@@ -33,7 +35,7 @@ EOT;
     public function handle(): void
     {
         $name = $this->argument('name');
-        $path = app_path($this->getNamespace()) . 's';
+        $path = $this->getNamespace();
         $subfolder = null;
 
         if (preg_match('#[/\\\\]#', $name)) {
@@ -48,7 +50,7 @@ EOT;
         $file = $path . '/' . $name . '.php';
 
         if (File::exists($file)) {
-            $this->error($this->getNamespace() . ' already exists!');
+            $this->error($this->getClassName() . ' already exists.');
             return;
         }
 
@@ -57,6 +59,6 @@ EOT;
 
         File::put($file, $stub);
 
-        $this->info($this->getNamespace() . ' created successfully.');
+        $this->info($this->getClassName() . ' created successfully.');
     }
 }

@@ -10,6 +10,11 @@ class AddActionCommand extends AddClassCommand
 
     protected function getNamespace(): string
     {
+        return 'App\Actions';
+    }
+
+    protected function getClassName(): string
+    {
         return 'Action';
     }
 }
