@@ -9,9 +9,6 @@ use App\Models\MessageStatus;
 
 class UpdateMessageStatusController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
     public function __invoke(UpdateMessageStatusRequest $request): void
     {
         MessageStatus::query()->where($request->only(['user_id', 'message_id']))

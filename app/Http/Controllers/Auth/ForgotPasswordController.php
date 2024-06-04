@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Actions\Auth\UpdatePasswordAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\UpdatePasswordRequest;
-use App\Models\User;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
 
 class ForgotPasswordController extends Controller
 {
@@ -35,19 +33,11 @@ class ForgotPasswordController extends Controller
         ]);
     }
 
-    public function password_update(UpdatePasswordRequest $request): \Illuminate\Http\RedirectResponse
-    {
-        $status = Password::reset(
-            $request->validated(),
-            function (User $user, string $password) {
-                $user->setRememberToken(Str::random(60));
-                $user->password = $password;
-
-                $user->save();
-
-                event(new PasswordReset($user));
-            }
-        );
+    public function password_update(
+        UpdatePasswordRequest $request,
+        UpdatePasswordAction $action
+    ): \Illuminate\Http\RedirectResponse {
+        $status = $action($request);
 
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->with('success', __($status))

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Chat;
 
+use App\Actions\Chat\StoreChatAction;
 use App\Http\Controllers\Chat\Message\LoadMessagesController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\StoreRequest;
@@ -11,21 +12,12 @@ use App\Models\Chat;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 
 class ChatController extends Controller
 {
     public function __construct()
     {
         $this->authorizeResource(Chat::class, 'chat');
-    }
-
-    private function getUserIdsAsString(array $user_ids): string
-    {
-        sort($user_ids);
-
-        return implode('-', $user_ids);
     }
 
     public function index(): \Inertia\Response|\Inertia\ResponseFactory
@@ -37,28 +29,9 @@ class ChatController extends Controller
         ]);
     }
 
-    public function store(User $user, StoreRequest $request): \Illuminate\Http\RedirectResponse
+    public function store(User $user, StoreRequest $request, StoreChatAction $action): \Illuminate\Http\RedirectResponse
     {
-        $user_ids = [(int)$request->validated()['user'], auth()->id()];
-
-        try {
-            DB::beginTransaction();
-
-            $chat = Chat::query()->updateOrCreate([
-                'users' => $this->getUserIdsAsString($user_ids),
-                'listing_id' => (int)$request->validated()['listing_id'],
-            ]);
-
-            $chat->users()->sync($user_ids);
-
-            DB::commit();
-        } catch (\Exception $exception) {
-            DB::rollBack();
-
-            Log::error($exception);
-
-            return back()->with('error', $exception->getMessage());
-        }
+        $chat = $action($request);
 
         return redirect()->route('chats.show', $chat->id);
     }
