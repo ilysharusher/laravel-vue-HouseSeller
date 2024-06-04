@@ -25,7 +25,7 @@ abstract class AddClassCommand extends Command
 
         try {
             (new AddClassCommandAction($namespace, $className, $subfolder))->__invoke();
-            $this->info($this->getClassName() . ' created successfully.');
+            $this->info("{$className} created successfully.");
         } catch (\Exception $e) {
             $this->error($e->getMessage());
         }
