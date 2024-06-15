@@ -1,6 +1,15 @@
-version: "3"
-
 services:
+    nginx:
+        image: nginx
+        restart: always
+        volumes:
+            - ./:/var/www/house-seller
+            - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+        ports:
+            - "8876:80"
+        depends_on:
+            - app
+        container_name: nginx
     redis:
         image: redis
         restart: always
@@ -9,27 +18,32 @@ services:
         volumes:
             - ./tmp/redis:/data
         command: redis-server
+        container_name: redis
     mysql:
         image: mysql
+        restart: always
         ports:
             - "3306:3306"
-        restart: always
         volumes:
             - ./tmp/mysql:/var/lib/mysql
         environment:
-            MYSQL_DATABASE: laravel-vue-HouseSeller
-            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
         command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+        container_name: mysql
     mailpit:
         image: axllent/mailpit
+        restart: unless-stopped
         ports:
             - "8025:8025"
             - "1025:1025"
-        restart: unless-stopped
-    phpmyadmin:
-        image: phpmyadmin
-        restart: always
-        ports:
-            - "8080:80"
-        environment:
-            - PMA_ARBITRARY=1
+        container_name: mailpit
+    app:
+        build:
+            context: .
+            dockerfile: _docker/app/Dockerfile
+        volumes:
+            - ./:/var/www/house-seller
+        depends_on:
+            - mysql
+        container_name: app
