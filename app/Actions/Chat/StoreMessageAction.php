@@ -20,8 +20,7 @@ class StoreMessageAction
             'text' => $validatedData['text'],
         ]);
 
-        StoreMessageStatusJob::dispatch($validatedData, $chatId, $message)
-            ->onQueue('store_message_status');
+        StoreMessageStatusJob::dispatch($validatedData, $chatId, $message);
 
         broadcast(new StoreMessageEvent($message))->toOthers();
 
