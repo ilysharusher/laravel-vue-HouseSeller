@@ -28,6 +28,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- \
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
 
-RUN npm install
-
 WORKDIR /var/www/house-seller
