@@ -20,33 +20,14 @@ RUN apt-get update && apt-get install -y \
 
 COPY ./_docker/app/php.ini /usr/local/etc/php/conf.d/php.ini
 
-
-#COPY app                /var/www/app
-#COPY bootstrap          /var/www/bootstrap
-#COPY config             /var/www/config
-#COPY database           /var/www/database
-#COPY lang               /var/www/lang
-#COPY public             /var/www/public
-#COPY resources          /var/www/resources
-#COPY artisan            /var/www/artisan
-#COPY routes             /var/www/routes
-#COPY storage            /var/www/storage
-#COPY package.json       /var/www/package.json
-#COPY package-lock.json  /var/www/package-lock.json
-#COPY postcss.config.js  /var/www/postcss.config.js
-#COPY vite.config.js     /var/www/vite.config.js
-#COPY tailwind.config.js /var/www/tailwind.config.js
-#
-#COPY composer.*  ./
-
 ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN curl -sS https://getcomposer.org/installer | php -- \
     --filename=composer \
     --install-dir=/usr/local/bin
 
-#RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
-#RUN apt-get install -y nodejs
-#
-#RUN npm install
+RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
+RUN apt-get install -y nodejs
+
+RUN npm install
 
 WORKDIR /var/www/house-seller
