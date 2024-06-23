@@ -4,9 +4,11 @@ services:
     restart: always
     volumes:
       - ./:/var/www/house-seller
-      - ./_docker/nginx/conf.d:/etc/nginx/conf.d
+      - ./_docker/nginx/conf.d.prod:/etc/nginx/conf.d
+      - /etc/letsencrypt:/etc/letsencrypt
     ports:
       - "80:80"
+      - "443:443"
     depends_on:
       - app
     container_name: nginx
