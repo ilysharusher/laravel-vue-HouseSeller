@@ -55,14 +55,13 @@ jobs:
             git pull
             docker compose -f docker-compose.prod.yml down
             docker compose -f docker-compose.prod.yml up --build -d
-            docker exec -it app bash
-            php artisan down
-            composer install --no-dev --optimize-autoloader
-            npm install
-            npm run build
-            php artisan migrate --force
-            php artisan config:cache
-            php artisan event:cache
-            php artisan route:cache
-            php artisan view:cache
-            php artisan up
+            docker exec -it app php artisan down
+            docker exec -it app composer install --no-dev --optimize-autoloader
+            docker exec -it app npm install
+            docker exec -it app npm run build
+            docker exec -it app php artisan migrate --force
+            docker exec -it app php artisan config:cache
+            docker exec -it app php artisan event:cache
+            docker exec -it app php artisan route:cache
+            docker exec -it app php artisan view:cache
+            docker exec -it app php artisan up
