@@ -16,7 +16,8 @@ class StoreChatAction
         return implode('-', $user_ids);
     }
 
-    public function __invoke(StoreRequest $request
+    public function __invoke(
+        StoreRequest $request
     ): \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Builder|\LaravelIdea\Helper\App\Models\_IH_Chat_QB|\Illuminate\Http\RedirectResponse|Chat {
         $user_ids = [(int)$request->validated()['user'], auth()->id()];
 
