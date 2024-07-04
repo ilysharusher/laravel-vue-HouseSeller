@@ -18,9 +18,11 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
         ]);
 
-        User::factory(10)
-            ->has(Listing::factory(3)
-                ->has(ListingImage::factory(3), 'images')
+        User::factory(10)->has(
+            Listing::factory(3)->has(
+                ListingImage::factory(3),
+                'images'
+            )
         )->create();
     }
 }
