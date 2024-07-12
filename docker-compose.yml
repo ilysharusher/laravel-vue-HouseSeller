@@ -37,6 +37,8 @@ services:
       dockerfile: _docker/app/Dockerfile
     volumes:
       - ./:/var/www/house-seller.ninja
+    ports:
+      - "5173:5173"
     depends_on:
       - mysql
     container_name: app

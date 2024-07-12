@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Listing;
+namespace App\Http\Controllers\Realtor;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Listing\ListingImage\StoreListingImageRequest;

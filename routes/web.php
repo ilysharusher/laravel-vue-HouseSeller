@@ -4,10 +4,10 @@ use App\Http\Controllers\Chat\ChatController;
 use App\Http\Controllers\Chat\Message\LoadMessagesController;
 use App\Http\Controllers\Chat\Message\MessageController;
 use App\Http\Controllers\Chat\Message\UpdateMessageStatusController;
-use App\Http\Controllers\Listing\{ListingController, ListingImageController, ListingOfferController};
+use App\Http\Controllers\Listing\{ListingController, ListingOfferController};
 use App\Http\Controllers\Notification\{DeleteAllNotifications, MarkNotificationAsRead, NotificationController};
 use App\Http\Controllers\Offer\AcceptOfferController;
-use App\Http\Controllers\Realtor\RealtorListingController;
+use App\Http\Controllers\Realtor\{ListingImageController, RealtorListingController};
 use Illuminate\Support\Facades\Route;
 
 Route::resource('listing', ListingController::class)->only('index', 'show');

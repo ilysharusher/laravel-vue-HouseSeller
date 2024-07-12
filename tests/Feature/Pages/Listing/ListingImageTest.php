@@ -2,7 +2,7 @@
 
 namespace Pages\Listing;
 
-use App\Http\Controllers\Listing\ListingImageController;
+use App\Http\Controllers\Realtor\ListingImageController;
 use App\Models\Listing;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
