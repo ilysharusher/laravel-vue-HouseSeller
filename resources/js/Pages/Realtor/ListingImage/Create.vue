@@ -31,7 +31,7 @@ const imageError = computed(() => Object.values(form.errors));
 
 <template>
     <unsuccess-alert v-if="imageError.length" :flash-unsuccess="imageError[0]" />
-    <Box class="pb-2">
+    <Box class="pb-2 mt-3">
         <template #title>Upload New Images</template>
         <div>
             <div class="flex items-center justify-center w-full my-4">
