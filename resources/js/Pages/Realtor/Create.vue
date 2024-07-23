@@ -1,5 +1,5 @@
 <script setup>
-import { useForm } from '@inertiajs/vue3';
+import {useForm} from '@inertiajs/vue3';
 import ListingForm from '@/Components/Forms/ListingForm.vue';
 
 const form = useForm({
@@ -13,13 +13,15 @@ const form = useForm({
     price: null,
 });
 
-const submit = () => form.post(route('realtor.listing.store'));
+const submit = (action) => {
+    if (action === 'Create') {
+        form.post(route('realtor.listing.store'));
+    } else if (action === 'CreateWithPhotos') {
+        form.post(route('realtor.listing.store_with_images'));
+    }
+};
 </script>
 
 <template>
     <ListingForm :form="form" action="Create" @submit="submit" />
 </template>
-
-<style scoped>
-
-</style>

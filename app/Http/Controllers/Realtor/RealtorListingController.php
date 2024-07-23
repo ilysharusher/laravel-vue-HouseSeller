@@ -40,6 +40,14 @@ class RealtorListingController extends Controller
             ->with('success', 'Listing created successfully.');
     }
 
+    public function store_with_images(StoreRequest $request): \Illuminate\Http\RedirectResponse
+    {
+        $listing = $request->user()->listings()->create($request->validated());
+
+        return redirect()->route('realtor.listing.image.create', $listing)
+            ->with('success', 'Listing created successfully. Now you can add images.');
+    }
+
     public function show(Listing $listing): \Inertia\Response|\Inertia\ResponseFactory
     {
         $this->authorize('viewRealtor', $listing);

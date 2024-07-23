@@ -34,6 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
             'listing.image.destroy.all'
         );
         Route::resource('listing', RealtorListingController::class);
+        Route::post('listing/store_with_images', [RealtorListingController::class, 'store_with_images'])->name(
+            'listing.store_with_images'
+        );
         Route::resource('listing.image', ListingImageController::class);
         Route::patch('offer/{offer}/accept', AcceptOfferController::class)->name('offer.accept');
     });
