@@ -53,7 +53,7 @@ const imageError = computed(() => Object.values(form.errors));
                         'opacity-25 pointer-events-none': listing.images.length === 0,
                     }"
                     method="delete"
-                    type="button"
+                    as="button"
                     class="btn-secondary w-full text-center"
                     :href="route('realtor.listing.image.destroy.all', listing.id)"
                 >

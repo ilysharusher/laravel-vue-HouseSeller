@@ -5,12 +5,12 @@ import {Link} from '@inertiajs/vue3';
 defineProps({
     form: Object,
     action: String,
-    listingId: String,
+    listingId: Number,
     imagesCount: Number,
 });
 
 defineEmits({
-    submit: (submit) => true,
+    submit: (action) => ['Create', 'CreateWithPhotos'].includes(action),
 });
 </script>
 
