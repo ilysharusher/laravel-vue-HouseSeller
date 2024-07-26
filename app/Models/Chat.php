@@ -3,13 +3,10 @@
 namespace App\Models;
 
 use App\Events\MessageReadEvent;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Chat extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'users',
         'listing_id',
