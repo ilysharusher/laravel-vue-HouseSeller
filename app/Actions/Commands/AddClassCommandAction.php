@@ -36,14 +36,15 @@ EOT;
 
     public function __invoke(): void
     {
-        $path = $this->namespace;
+        $baseNamespace = str_replace('App\\', '', $this->namespace);
+        $path = app_path(str_replace('\\', '/', $baseNamespace));
 
         if ($this->subfolder) {
-            $path .= '/' . $this->subfolder;
+            $path .= '/' . str_replace(['\\', '/'], '/', $this->subfolder);
+        }
 
-            if (!File::isDirectory($path)) {
-                File::makeDirectory($path, 0755, true);
-            }
+        if (!File::isDirectory($path)) {
+            File::makeDirectory($path, 0755, true);
         }
 
         $file = $path . '/' . $this->className . '.php';
@@ -56,5 +57,7 @@ EOT;
         $stub = str_replace('{{class}}', $this->className, $stub);
 
         File::put($file, $stub);
+
+        echo $file . ' created successfully.' . PHP_EOL;
     }
 }
