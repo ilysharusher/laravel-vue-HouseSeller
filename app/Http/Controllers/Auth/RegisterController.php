@@ -21,8 +21,6 @@ class RegisterController extends Controller
 
         event(new Registered($user));
 
-        return redirect()
-            ->route('listing.index')
-            ->with('success', 'You have been registered. Please check your email for verification.');
+        return redirect()->route('listing.index');
     }
 }

@@ -37,17 +37,17 @@ EOT;
     public function __invoke(): void
     {
         $baseNamespace = str_replace('App\\', '', $this->namespace);
-        $path = app_path(str_replace('\\', '/', $baseNamespace));
+        $path = app_path(str_replace('\\', DIRECTORY_SEPARATOR, $baseNamespace));
 
         if ($this->subfolder) {
-            $path .= '/' . str_replace(['\\', '/'], '/', $this->subfolder);
+            $path .= DIRECTORY_SEPARATOR . str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $this->subfolder);
         }
 
         if (!File::isDirectory($path)) {
             File::makeDirectory($path, 0755, true);
         }
 
-        $file = $path . '/' . $this->className . '.php';
+        $file = $path . DIRECTORY_SEPARATOR . $this->className . '.php';
 
         if (File::exists($file)) {
             throw new \RuntimeException($this->className . ' already exists.');
