@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\{ForgotPasswordController,
     RegisterController,
     VerifyEmailController
 };
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('auth')->group(function () {
     Route::middleware('guest')->group(function () {
