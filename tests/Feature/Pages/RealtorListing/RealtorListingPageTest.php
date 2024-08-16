@@ -42,7 +42,7 @@ class RealtorListingPageTest extends TestCase
         );
     }
 
-    public function test_realtor_listing_page_can_be_rendered()
+    public function test_realtor_listing_page_can_be_rendered(): void
     {
         $this->get(
             action([RealtorListingController::class, 'index'])
@@ -56,7 +56,7 @@ class RealtorListingPageTest extends TestCase
             );
     }
 
-    public function test_realtor_listing_create_page_can_be_rendered()
+    public function test_realtor_listing_create_page_can_be_rendered(): void
     {
         $this->get(
             action([RealtorListingController::class, 'create'])
@@ -68,7 +68,7 @@ class RealtorListingPageTest extends TestCase
             );
     }
 
-    public function test_realtor_store_method_can_store_listing()
+    public function test_realtor_store_method_can_store_listing(): void
     {
         $data = StoreListingRequestFactory::new()->create();
 
@@ -92,7 +92,7 @@ class RealtorListingPageTest extends TestCase
         ]);
     }
 
-    public function test_realtor_listing_show_page_can_be_rendered()
+    public function test_realtor_listing_show_page_can_be_rendered(): void
     {
         $listing = $this->createListing($this->user);
 
@@ -107,7 +107,7 @@ class RealtorListingPageTest extends TestCase
             );
     }
 
-    public function test_realtor_listing_edit_page_can_be_rendered()
+    public function test_realtor_listing_edit_page_can_be_rendered(): void
     {
         $listing = $this->createListing($this->user);
 
@@ -123,7 +123,7 @@ class RealtorListingPageTest extends TestCase
             );
     }
 
-    public function test_realtor_listing_update_method_can_update_listing()
+    public function test_realtor_listing_update_method_can_update_listing(): void
     {
         $listing = $this->createListing($this->user);
 
@@ -154,7 +154,7 @@ class RealtorListingPageTest extends TestCase
         ]);
     }
 
-    public function test_realtor_listing_destroy_method_can_delete_listing()
+    public function test_realtor_listing_destroy_method_can_delete_listing(): void
     {
         $listing = $this->createListing($this->user);
 
@@ -173,7 +173,7 @@ class RealtorListingPageTest extends TestCase
         );
     }
 
-    public function test_realtor_listing_destroy_permanently_method_can_delete_listing_permanently()
+    public function test_realtor_listing_destroy_permanently_method_can_delete_listing_permanently(): void
     {
         $listing = $this->createListing($this->user);
 
@@ -186,7 +186,7 @@ class RealtorListingPageTest extends TestCase
         $this->assertDatabaseEmpty('listings');
     }
 
-    public function test_realtor_listing_restore_method_can_restore_listing()
+    public function test_realtor_listing_restore_method_can_restore_listing(): void
     {
         $listing = $this->createListing($this->user);
 

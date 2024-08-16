@@ -18,7 +18,7 @@ class LoginTest extends TestCase
         $this->withExceptionHandling();
     }
 
-    public function test_login_page_can_be_rendered()
+    public function test_login_page_can_be_rendered(): void
     {
         $this->get(
             action([LoginController::class, 'login'])
@@ -26,7 +26,7 @@ class LoginTest extends TestCase
             ->assertOk();
     }
 
-    public function test_user_can_login()
+    public function test_user_can_login(): void
     {
         $user = User::factory()->create();
 
@@ -43,7 +43,7 @@ class LoginTest extends TestCase
         $this->assertAuthenticated();
     }
 
-    public function test_user_cannot_login_with_invalid_credentials()
+    public function test_user_cannot_login_with_invalid_credentials(): void
     {
         $user = User::factory()->create();
 

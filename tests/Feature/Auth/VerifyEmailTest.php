@@ -34,7 +34,7 @@ class VerifyEmailTest extends TestCase
         return $user;
     }
 
-    public function test_verification_notice_page_can_be_rendered()
+    public function test_verification_notice_page_can_be_rendered(): void
     {
         $this->signIn();
 
@@ -44,7 +44,7 @@ class VerifyEmailTest extends TestCase
             ->assertOk();
     }
 
-    public function test_verification_email_can_be_sent()
+    public function test_verification_email_can_be_sent(): void
     {
         $user = $this->signIn();
 
@@ -60,7 +60,7 @@ class VerifyEmailTest extends TestCase
         );
     }
 
-    public function test_email_can_be_verified()
+    public function test_email_can_be_verified(): void
     {
         $user = $this->signIn();
 

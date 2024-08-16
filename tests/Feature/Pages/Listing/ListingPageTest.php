@@ -20,15 +20,7 @@ class ListingPageTest extends TestCase
         $this->withExceptionHandling();
     }
 
-    private function signIn(): User
-    {
-        $user = User::factory()->create();
-        $this->actingAs($user);
-
-        return $user;
-    }
-
-    public function test_listing_page_can_be_rendered()
+    public function test_listing_page_can_be_rendered(): void
     {
         $this->get(
             action([ListingController::class, 'index'])
@@ -42,7 +34,7 @@ class ListingPageTest extends TestCase
             );
     }
 
-    public function test_listing_show_page_can_be_rendered()
+    public function test_listing_show_page_can_be_rendered(): void
     {
         $listing = Listing::factory()->for(
             User::factory()

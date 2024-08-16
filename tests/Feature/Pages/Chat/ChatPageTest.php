@@ -5,6 +5,7 @@ namespace Tests\Feature\Pages\Chat;
 use App\Http\Controllers\Chat\ChatController;
 use App\Models\Listing;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -42,14 +43,14 @@ class ChatPageTest extends TestCase
         return $user;
     }
 
-    private function createListing(): \Illuminate\Database\Eloquent\Model|Listing
+    private function createListing(): Model|Listing
     {
         return $this->user->listings()->create(
             StoreListingRequestFactory::new()->create()
         );
     }
 
-    public function test_chat_page_can_be_rendered()
+    public function test_chat_page_can_be_rendered(): void
     {
         $this->get(
             action([ChatController::class, 'index'])
@@ -57,14 +58,14 @@ class ChatPageTest extends TestCase
             ->assertOk()
             ->assertInertia(
                 (
-                    fn (Assert $assert) => $assert
+                    static fn (Assert $assert) => $assert
                     ->component('Chat/Index')
                     ->has('chats')
                 )
             );
     }
 
-    public function test_chat_page_can_not_be_rendered_for_guests()
+    public function test_chat_page_can_not_be_rendered_for_guests(): void
     {
         Auth::logout();
 
@@ -74,7 +75,7 @@ class ChatPageTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_user_can_create_chat()
+    public function test_user_can_create_chat(): void
     {
         $anotherUser = User::factory()->create([
             'email_verified_at' => now(),
@@ -102,7 +103,7 @@ class ChatPageTest extends TestCase
         ]);
     }
 
-    public function test_user_can_not_create_chat_with_himself()
+    public function test_user_can_not_create_chat_with_himself(): void
     {
         $this->post(
             action([ChatController::class, 'store']),

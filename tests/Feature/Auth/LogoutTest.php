@@ -18,7 +18,7 @@ class LogoutTest extends TestCase
         return $user;
     }
 
-    public function test_user_can_logout()
+    public function test_user_can_logout(): void
     {
         $this->withExceptionHandling();
 

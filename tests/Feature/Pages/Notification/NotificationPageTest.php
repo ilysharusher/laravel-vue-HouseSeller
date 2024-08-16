@@ -66,7 +66,7 @@ class NotificationPageTest extends TestCase
         $this->actingAs($user);
     }
 
-    public function test_unauthenticated_user_cannot_access_notification_page()
+    public function test_unauthenticated_user_cannot_access_notification_page(): void
     {
         Auth::logout();
 
@@ -76,7 +76,7 @@ class NotificationPageTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_authenticated_user_can_access_notification_page()
+    public function test_authenticated_user_can_access_notification_page(): void
     {
         $this->get(
             action([NotificationController::class, 'index'])
@@ -84,7 +84,7 @@ class NotificationPageTest extends TestCase
             ->assertOk();
     }
 
-    public function test_user_can_mark_notification_as_read()
+    public function test_user_can_mark_notification_as_read(): void
     {
         $this->createNotification($this->user);
 
@@ -102,7 +102,7 @@ class NotificationPageTest extends TestCase
         $this->assertTrue($notification->fresh()->read());
     }
 
-    public function test_user_can_delete_all_notifications()
+    public function test_user_can_delete_all_notifications(): void
     {
         $this->createNotification($this->user);
 

@@ -5,6 +5,7 @@ namespace Pages\Listing;
 use App\Http\Controllers\Realtor\ListingImageController;
 use App\Models\Listing;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Testing\AssertableInertia as Assert;
@@ -42,14 +43,14 @@ class ListingImageTest extends TestCase
         return $user;
     }
 
-    private function createListing(): \Illuminate\Database\Eloquent\Model|Listing
+    private function createListing(): Model|Listing
     {
         return $this->user->listings()->create(
             StoreListingRequestFactory::new()->create()
         );
     }
 
-    public function test_listing_image_page_can_be_rendered()
+    public function test_listing_image_page_can_be_rendered(): void
     {
         $this->get(
             action([ListingImageController::class, 'create'], $this->listing->id)
@@ -65,7 +66,7 @@ class ListingImageTest extends TestCase
             );
     }
 
-    public function test_listing_image_can_be_stored()
+    public function test_listing_image_can_be_stored(): void
     {
         $this->post(
             action([ListingImageController::class, 'store'], $this->listing->id),
@@ -77,7 +78,7 @@ class ListingImageTest extends TestCase
         $this->assertCount(1, $this->listing->refresh()->images);
     }
 
-    public function test_listing_image_can_be_deleted()
+    public function test_listing_image_can_be_deleted(): void
     {
         $this->post(
             action([ListingImageController::class, 'store'], $this->listing->id),
@@ -96,7 +97,7 @@ class ListingImageTest extends TestCase
             ->assertSessionHas('success');
     }
 
-    public function test_all_listing_images_can_be_deleted()
+    public function test_all_listing_images_can_be_deleted(): void
     {
         $this->post(
             action([ListingImageController::class, 'store'], $this->listing->id),

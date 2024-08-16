@@ -5,6 +5,7 @@ namespace Tests\Feature\Pages\Listing;
 use App\Http\Controllers\Listing\ListingOfferController;
 use App\Models\Listing;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -41,14 +42,14 @@ class ListingOfferTest extends TestCase
         return $user;
     }
 
-    private function createListing(): \Illuminate\Database\Eloquent\Model|Listing
+    private function createListing(): Model|Listing
     {
         return $this->user->listings()->create(
             StoreListingRequestFactory::new()->create()
         );
     }
 
-    public function test_guests_cannot_make_an_offer()
+    public function test_guests_cannot_make_an_offer(): void
     {
         Auth::logout();
         $this->assertGuest();
@@ -62,7 +63,7 @@ class ListingOfferTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_authenticated_users_can_make_an_offer()
+    public function test_authenticated_users_can_make_an_offer(): void
     {
         $anotherUser = User::factory()->create([
             'email_verified_at' => now(),
@@ -80,7 +81,7 @@ class ListingOfferTest extends TestCase
             ->assertSessionHas('success');
     }
 
-    public function test_guests_cannot_accept_an_offer()
+    public function test_guests_cannot_accept_an_offer(): void
     {
         $anotherUser = User::factory()->create([
             'email_verified_at' => now(),
@@ -106,7 +107,7 @@ class ListingOfferTest extends TestCase
             ->assertRedirect(route('login'));
     }
 
-    public function test_authenticated_users_can_accept_an_offer()
+    public function test_authenticated_users_can_accept_an_offer(): void
     {
         $anotherUser = User::factory()->create([
             'email_verified_at' => now(),

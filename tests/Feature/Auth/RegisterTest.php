@@ -22,7 +22,7 @@ class RegisterTest extends TestCase
         $this->withExceptionHandling();
     }
 
-    public function test_register_page_can_be_rendered()
+    public function test_register_page_can_be_rendered(): void
     {
         $this->get(
             action([RegisterController::class, 'register'])
@@ -30,7 +30,7 @@ class RegisterTest extends TestCase
             ->assertOk();
     }
 
-    public function test_user_can_register()
+    public function test_user_can_register(): void
     {
         Event::fake();
 
@@ -43,7 +43,7 @@ class RegisterTest extends TestCase
             ->assertValid()
             ->assertRedirect(route('listing.index'));
 
-        Event::assertDispatched(Registered::class, function ($event) use ($data) {
+        Event::assertDispatched(Registered::class, static function ($event) use ($data) {
             return $event->user->email === $data['email'];
         });
 
